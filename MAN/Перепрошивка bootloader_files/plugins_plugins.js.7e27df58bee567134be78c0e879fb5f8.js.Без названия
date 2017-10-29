@@ -1,0 +1,2 @@
+;(function($,_,undefined){"use strict";ips.createModule('cv.insert.nick',function(){var insertNick=function(id,name,link,hover_link){var replyArea=$('div[data-role="replyArea"]');var editor=replyArea.find('[data-role="contentEditor"]');var editorID=editor.attr('name');if(editorID){$(document).trigger('initializeEditor',{editorID:editorID});}
+CKEDITOR.instances[editorID].insertHtml("<a href='"+link+"' contenteditable='false' data-ipshover data-ipshover-target='"+hover_link+"' data-mentionid='"+id+"'>@"+name+"</a> ");};return{insertNick:insertNick}})}(jQuery,_));;

@@ -1,0 +1,6 @@
+avrdude -C C:\usr\seo-soft\arduino-1.8.4\hardware\tools\avr\etc/avrdude.conf -c avrisp -P COM3 -b 19200 -p m8 -v
+
+avrdude -C C:\usr\seo-soft\arduino-1.8.4\hardware\tools\avr\etc/avrdude.conf -c avrisp -P COM3 -b 19200 -p m8 -U flash:r:USBASP_FW_old.hex:i
+
+avrdude -C ../etc/avrdude.conf -c avrisp -P COM3 -b 19200 -p m8 -U flash:w:usbasp.atmega8.2011-05-28.hex
+avrdude -C ../etc/avrdude.conf -c avrisp -P COM3 -b 19200 -p m8 -U lfuse:w:0xef:m -U hfuse:w:0xc9:m

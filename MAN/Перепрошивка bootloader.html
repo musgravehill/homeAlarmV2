@@ -1,0 +1,2900 @@
+<!DOCTYPE html>
+<!-- saved from url=(0065)https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/ -->
+<html lang="ru-RU" dir="ltr" class="mdl-js" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Перепрошивка bootloader (загрузчика) - Arduino - iT4iT.CLUB</title>
+<!--[if lt IE 9]>
+			<link rel="stylesheet" type="text/css" href="https://it4it.club/uploads/css_built_6/5e61784858ad3c11f00b5706d12afe52_ie8.css.a045c745031b734e559f0d92ae951077.css">
+		    <script src="//it4it.club/applications/core/interface/html5shiv/html5shiv.js"></script>
+		<![endif]-->
+		
+
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+	
+		
+			
+				<meta name="description" content="
+
+	Update 02.12.2015
+
+
+
+
+		Статья переработана и перепроверена
+	
+	
+		Актуально для Optiboot 6.2 и Arduino IDE 1.6.6 или выше.
+	
+
+
+	Рано или поздно приходится...">
+			
+		
+	
+
+	
+		
+			
+				<meta property="og:title" content="Перепрошивка bootloader (загрузчика)">
+			
+		
+	
+
+	
+		
+			
+				<meta property="og:type" content="object">
+			
+		
+	
+
+	
+		
+			
+				<meta property="og:url" content="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/">
+			
+		
+	
+
+	
+		
+			
+				<meta property="og:description" content="
+
+	Update 02.12.2015
+
+
+
+
+		Статья переработана и перепроверена
+	
+	
+		Актуально для Optiboot 6.2 и Arduino IDE 1.6.6 или выше.
+	
+
+
+	Рано или поздно приходится...">
+			
+		
+	
+
+	
+		
+			
+				<meta property="og:updated_time" content="2016-01-21T21:50:39Z">
+			
+		
+	
+
+	
+		
+			
+				<meta name="keywords" content="arduino, usbasp, arduinoisp, arduino as isp, bootloader, optiboot">
+			
+		
+	
+
+	
+		
+			
+				<meta property="og:site_name" content="iT4iT.CLUB">
+			
+		
+	
+
+	
+		
+			
+				<meta property="og:locale" content="ru_RU">
+			
+		
+	
+
+<meta name="theme-color" content="#3d6594">
+<link rel="canonical" href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/">
+
+
+		
+
+
+	
+		<link href="./Перепрошивка bootloader_files/css" rel="stylesheet">
+	
+
+
+
+	<link rel="stylesheet" href="./Перепрошивка bootloader_files/341e4a57816af3ba440d891ca87450ff_framework.css.a582cb7c1e1f30fff4defee1b6ee8de8.css" media="all">
+
+	<link rel="stylesheet" href="./Перепрошивка bootloader_files/05e81b71abe4f22d6eb8d1a929494829_responsive.css.20262897046546c687951939534d2cf8.css" media="all">
+
+	<link rel="stylesheet" href="./Перепрошивка bootloader_files/20446cf2d164adcc029377cb04d43d17_flags.css.1a5a42d5a961ef7a6ecb1d0462919cd6.css" media="all">
+
+	<link rel="stylesheet" href="./Перепрошивка bootloader_files/90eb5adf50a8c640f633d47fd7eb1778_core.css.d016705c68cbeef7679a6fbaa4ae4707.css" media="all">
+
+	<link rel="stylesheet" href="./Перепрошивка bootloader_files/5a0da001ccc2200dc5625c3f3934497d_core_responsive.css.f56273d8034a90d887b366547abb9d12.css" media="all">
+
+	<link rel="stylesheet" href="./Перепрошивка bootloader_files/62e269ced0fdab7e30e026f1d30ae516_forums.css.ca50ab6efbe508d73b1539ef077cb3cc.css" media="all">
+
+	<link rel="stylesheet" href="./Перепрошивка bootloader_files/76e62c573090645fb99a15a363d8620e_forums_responsive.css.9bba78e3ede3101effebc6492c8ebef7.css" media="all">
+
+
+
+
+<link rel="stylesheet" href="./Перепрошивка bootloader_files/258adbb6e4f3e83cd3b355f84e3fa002_custom.css.5a982600a0782840ce6d8425e4d2214b.css" media="all">
+
+
+
+		
+		
+
+	<style>
+#ipsLayout_header header {
+  background-color: #3d5e78;
+  background-image: url(https://it4it.club/uploads/monthly_2015_08/head1.jpg.abe5fafe4eb5f8623f2f1995083c808d.jpg);
+  background-repeat: no-repeat;
+  background-position: initial;
+  background-size: cover;
+  
+}
+</style><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Перепрошивка bootloader_files/translateelement.css"><script type="text/javascript" async="" src="./Перепрошивка bootloader_files/linkid.js.Без названия"></script><script async="" src="./Перепрошивка bootloader_files/analytics.js.Без названия"></script><script type="text/javascript" charset="UTF-8" src="./Перепрошивка bootloader_files/main_ru.js.Без названия"></script><script type="text/javascript" charset="UTF-8" src="./Перепрошивка bootloader_files/element_main.js.Без названия"></script></head><body class="ipsApp ipsApp_front ipsClearfix ipsJS_has ipsApp_noTouch" data-controller="core.front.core.app" data-message="" data-pageapp="forums" data-pagelocation="front" data-pagemodule="forums" data-pagecontroller="topic" style="position: relative; min-height: 100%; top: 0px;"><a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#elContent" class="ipsHide" title="Перейти к основному содержимому" accesskey="m">Перейти к содержимому</a>
+		
+		<div id="ipsLayout_header" class="ipsClearfix">
+			
+
+			
+
+
+			
+<ul id="elMobileNav" class="ipsList_inline ipsResponsive_hideDesktop ipsResponsive_block" data-controller="core.front.core.mobileNav" data-default="all">
+	
+		
+			
+			
+				
+				
+			
+				
+					<li id="elMobileBreadcrumb">
+						<a href="https://it4it.club/forum/16-arduino/">
+							<span>Arduino</span>
+						</a>
+					</li>
+				
+				
+			
+				
+				
+			
+		
+	
+	
+	
+	<li>
+		<a data-action="defaultStream" class="ipsType_light" href="https://it4it.club/discover/"><i class="icon-newspaper"></i></a>
+	</li>
+
+	
+		<li class="ipsJS_show">
+			<a href="https://it4it.club/search/" data-action="mobileSearch"><i class="fa fa-search"></i></a>
+		</li>
+	
+	<li data-ipsdrawer="" data-ipsdrawer-drawerelem="#elMobileDrawer">
+		<a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#">
+			
+			
+				
+			
+			
+			
+			<i class="fa fa-navicon"></i>
+		</a>
+	</li>
+</ul>
+			<header><div class="ipsLayout_container">
+					
+
+<a href="https://it4it.club/" id="elSiteTitle" accesskey="1">iT4iT.CLUB</a>
+
+					
+
+	<ul id="elUserNav" class="ipsList_inline cSignedOut ipsClearfix ipsResponsive_hidePhone ipsResponsive_block">
+		
+		<li id="elSignInLink">
+			
+				<a href="https://it4it.club/login/" data-ipsmenu-closeonclick="false" data-ipsmenu="" id="elUserSignIn">
+					Уже зарегистрированы? Войти &nbsp;<i class="fa fa-caret-down"></i>
+				</a>
+			
+			
+<div id="elUserSignIn_menu" class="ipsMenu ipsMenu_auto ipsHide">
+	<div data-role="loginForm">
+		
+			<div class="ipsColumns ipsColumns_noSpacing">
+				<div class="ipsColumn ipsColumn_wide" id="elUserSignIn_internal">
+		
+		
+			
+		
+			
+				
+<form accept-charset="utf-8" class="ipsPad ipsForm ipsForm_vertical" method="post" action="https://it4it.club/login/" data-ipsvalidation="" novalidate="">
+	<input type="hidden" name="login__standard_submitted" value="1">
+	
+		<input type="hidden" name="csrfKey" value="ccb9bd9ca6920cbbecc170f4987a4cf9">
+	
+	<h4 class="ipsType_sectionHead">Войти</h4>
+	<br><br>
+	<ul class="ipsList_reset">
+		
+			
+				
+					<li class="ipsFieldRow ipsFieldRow_noLabel ipsFieldRow_fullWidth">
+						<input type="text" required="" placeholder="Имя пользователя или email-адрес" name="auth" id="auth">
+					</li>
+				
+			
+				
+					<li class="ipsFieldRow ipsFieldRow_noLabel ipsFieldRow_fullWidth">
+						<input type="password" required="" placeholder="Пароль" name="password" id="password">
+					</li>
+				
+			
+				
+					
+<li class="ipsFieldRow ipsFieldRow_checkbox ipsClearfix " id="9c7ffa65f11c317804907d1e35f70d9d">
+	
+		
+		
+<input type="hidden" name="remember_me" value="0">
+<span class="ipsCustomInput">
+	<input type="checkbox" name="remember_me_checkbox" value="1" id="check_9c7ffa65f11c317804907d1e35f70d9d" data-toggle-id="9c7ffa65f11c317804907d1e35f70d9d" checked="" aria-checked="true">
+	
+	<span></span>
+</span>
+
+
+		
+		<div class="ipsFieldRow_content">
+			<label class="ipsFieldRow_label" for="check_9c7ffa65f11c317804907d1e35f70d9d">Запомнить меня </label>
+			
+
+
+<span class="ipsFieldRow_desc">
+	Не рекомендуется на общедоступных компьютерах
+</span>
+			
+			
+		</div>
+	
+</li>
+				
+			
+				
+					
+<li class="ipsFieldRow ipsFieldRow_checkbox ipsClearfix " id="447c4ee74bbd7ef2ff264d7b7231e3e7">
+	
+		
+		
+<input type="hidden" name="signin_anonymous" value="0">
+<span class="ipsCustomInput">
+	<input type="checkbox" name="signin_anonymous_checkbox" value="1" id="check_447c4ee74bbd7ef2ff264d7b7231e3e7" data-toggle-id="447c4ee74bbd7ef2ff264d7b7231e3e7" aria-checked="false">
+	
+	<span></span>
+</span>
+
+
+		
+		<div class="ipsFieldRow_content">
+			<label class="ipsFieldRow_label" for="check_447c4ee74bbd7ef2ff264d7b7231e3e7">Войти анонимно </label>
+			
+			
+			
+		</div>
+	
+</li>
+				
+			
+		
+		<li class="ipsFieldRow ipsFieldRow_fullWidth">
+			<br>
+			<button type="submit" class="ipsButton ipsButton_primary ipsButton_small" id="elSignIn_submit">Войти</button>
+			<br>
+			<p class="ipsType_right ipsType_small">
+				<a href="https://it4it.club/lostpassword/" data-ipsdialog="" data-ipsdialog-title="Забыли пароль?">Забыли пароль?</a>
+			</p>
+		</li>
+	</ul>
+</form>
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+		
+				</div>
+				<div class="ipsColumn ipsColumn_wide">
+					<div class="ipsPad" id="elUserSignIn_external">
+						<div class="ipsAreaBackground_light ipsPad_half">
+							<p class="ipsType_reset ipsType_small ipsType_center"><strong>Или войдите с помощью этих сервисов</strong></p>
+							<br>
+							
+								
+									<div class="ipsPad_half ipsType_center">
+										
+
+<a href="https://oauth.vk.com/authorize?client_id=5331803&amp;scope=offline,email,status&amp;redirect_uri=https%3A%2F%2Fit4it.club%2Fapplications%2Fcore%2Finterface%2Fvk%2Fauth.php&amp;state=front-ccb9bd9ca6920cbbecc170f4987a4cf9" class="ipsButton ipsButton_verySmall ipsButton_fullWidth ipsSocial ipsSocial_vk" style="background-color: #4c75a3">
+	<span class="ipsSocial ipsSocial_icon"><i class="fa fa-vk"></i></span>
+	<span class="ipsSocial ipsSocial_text">Войти через ВКонтакте</span>
+</a>
+									</div>
+								
+							
+								
+							
+								
+									<div class="ipsPad_half ipsType_center">
+										
+<a href="https://accounts.google.com/o/oauth2/auth?response_type=code&amp;client_id=138636930562-ps7n5pq5ecaup38mb8g6b3rukk64sug1.apps.googleusercontent.com&amp;redirect_uri=https://it4it.club/applications/core/interface/google/auth.php&amp;scope=https://www.googleapis.com/auth/plus.login%20https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/userinfo.profile&amp;access_type=offline&amp;state=front-ccb9bd9ca6920cbbecc170f4987a4cf9-aHR0cHM6Ly9pdDRpdC5jbHViL2xvZ2luLw==" class="ipsButton ipsButton_verySmall ipsButton_fullWidth ipsSocial ipsSocial_google">
+	<span class="ipsSocial_icon"><i class="fa fa-google-plus"></i></span>
+	<span class="ipsSocial_text">Войти через Google</span>
+</a>
+									</div>
+								
+							
+								
+									<div class="ipsPad_half ipsType_center">
+										
+<a href="https://it4it.club/login/?loginProcess=twitter&amp;ref=aHR0cHM6Ly9pdDRpdC5jbHViL2xvZ2luLw==" class="ipsButton ipsButton_verySmall ipsButton_fullWidth ipsSocial ipsSocial_twitter">
+	<span class="ipsSocial_icon"><i class="fa fa-twitter"></i></span>
+	<span class="ipsSocial_text">Войти через Twitter</span>
+</a>
+									</div>
+								
+							
+								
+									<div class="ipsPad_half ipsType_center">
+										
+
+<a href="https://www.facebook.com/dialog/oauth?client_id=945816362124469&amp;scope=email&amp;redirect_uri=https://it4it.club/applications/core/interface/facebook/auth.php&amp;state=front-ccb9bd9ca6920cbbecc170f4987a4cf9-aHR0cHM6Ly9pdDRpdC5jbHViL2xvZ2luLw==" class="ipsButton ipsButton_verySmall ipsButton_fullWidth ipsSocial ipsSocial_facebook">
+	<span class="ipsSocial_icon"><i class="fa fa-facebook"></i></span>
+	<span class="ipsSocial_text">Войти через Facebook</span>
+</a>
+									</div>
+								
+							
+								
+									<div class="ipsPad_half ipsType_center">
+										
+
+<a href="https://login.live.com/oauth20_authorize.srf?client_id=000000004415FD81&amp;scope=wl.signin%20wl.emails%20wl.offline_access&amp;response_type=code&amp;redirect_uri=https://it4it.club/applications/core/interface/microsoft/auth.php&amp;state=front-ccb9bd9ca6920cbbecc170f4987a4cf9-aHR0cHM6Ly9pdDRpdC5jbHViL2xvZ2luLw==" class="ipsButton ipsButton_verySmall ipsButton_fullWidth ipsSocial ipsSocial_microsoft">
+	<span class="ipsSocial_icon"><i class="fa fa-windows"></i></span>
+	<span class="ipsSocial_text">Войти через Microsoft</span>
+</a>
+									</div>
+								
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		
+	</div>
+</div>
+		</li>
+		
+			<li>
+				<a href="https://it4it.club/register/" data-ipsdialog="" data-ipsdialog-size="narrow" data-ipsdialog-title="Регистрация" id="elRegisterButton" class="ipsButton ipsButton_normal ipsButton_primary">
+						Регистрация
+				</a>
+			</li>
+		
+	</ul>
+
+				</div>
+			</header>
+			
+
+	<nav data-controller="core.front.core.navBar" class="" id="ips_uid_3765_2">
+		<div class="ipsNavBar_primary ipsLayout_container  ipsClearfix">
+			
+				<div id="elSearch" class="ipsPos_right" data-controller="core.front.core.quickSearch" data-default="all">
+					<form accept-charset="utf-8" action="https://it4it.club/search/" method="post">
+						<a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#" id="elSearchFilter" data-ipsmenu="" data-ipsmenu-selectable="radio" data-ipsmenu-appendto="#elSearch" class="ipsHide">
+							<span data-role="searchingIn">
+								
+									
+										В этой теме
+										
+										
+											<input name="type" value="forums_topic" data-role="searchFilter" type="hidden">
+										
+											<input name="item" value="19" data-role="searchFilter" type="hidden">
+										
+										
+								
+							</span>
+							<i class="fa fa-caret-down"></i>
+						</a>
+						<input type="hidden" name="type" value="forums_topic" data-role="searchFilter">
+						<ul id="elSearchFilter_menu" class="ipsMenu ipsMenu_selectable ipsMenu_narrow ipsHide">
+							<li class="ipsMenu_item " data-ipsmenuvalue="all">
+								<a href="https://it4it.club/index.php?app=core&amp;module=search&amp;controller=search&amp;csrfKey=ccb9bd9ca6920cbbecc170f4987a4cf9" title="Везде">Везде</a>
+							</li>
+							<li class="ipsMenu_sep"><hr></li>
+							
+								
+								
+									<li class="ipsMenu_item ipsMenu_itemChecked" data-ipsmenuvalue="{&quot;type&quot;:&quot;forums_topic&quot;,&quot;item&quot;:19}" data-options="{&quot;type&quot;:&quot;forums_topic&quot;,&quot;item&quot;:19}">
+										<a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#">В этой теме</a>
+									</li>
+								
+									<li class="ipsMenu_item " data-ipsmenuvalue="{&quot;type&quot;:&quot;forums_topic&quot;,&quot;nodes&quot;:16}" data-options="{&quot;type&quot;:&quot;forums_topic&quot;,&quot;nodes&quot;:16}">
+										<a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#">В этом разделе</a>
+									</li>
+								
+								<li class="ipsMenu_sep"><hr></li>
+							
+							<li data-role="globalSearchMenuOptions"></li>
+							<li class="ipsMenu_item ipsMenu_itemNonSelect">
+								<a href="https://it4it.club/search/" accesskey="4"><i class="fa fa-cog"></i> Расширенный поиск</a>
+							</li>
+						</ul>
+						<input type="search" id="elSearchField" placeholder="Поиск..." name="q">
+						<button type="submit"><i class="fa fa-search"></i></button>
+					</form>
+				</div>
+			
+			<ul data-role="primaryNavBar" class="ipsResponsive_showDesktop ipsResponsive_block">
+				
+
+
+	
+		
+		
+			
+		
+		<li class="ipsNavBar_active" data-active="" id="elNavSecondary_1" data-role="navBarItem" data-navapp="core" data-navext="CustomItem" data-originalwidth="137">
+			
+			
+				<a href="https://it4it.club/" data-navitem-id="1" data-navdefault="" data-active="true">
+					Сообщество
+				</a>
+			
+			
+				<ul class="ipsNavBar_secondary " data-role="secondaryNavBar">
+					
+
+
+	
+		
+		
+			
+		
+		<li class="ipsNavBar_active" data-active="" id="elNavSecondary_3" data-role="navBarItem" data-navapp="forums" data-navext="Forums" data-originalwidth="78">
+			
+			
+				<a href="https://it4it.club/" data-navitem-id="3" data-navdefault="">
+					Форум
+				</a>
+			
+			
+		</li>
+	
+	
+
+	
+		
+		
+		<li id="elNavSecondary_4" data-role="navBarItem" data-navapp="blog" data-navext="Blogs" data-originalwidth="72">
+			
+			
+				<a href="https://it4it.club/blogs/" data-navitem-id="4">
+					Блоги
+				</a>
+			
+			
+		</li>
+	
+	
+
+	
+		
+		
+		<li id="elNavSecondary_5" data-role="navBarItem" data-navapp="calendar" data-navext="Calendar" data-originalwidth="102">
+			
+			
+				<a href="https://it4it.club/calendar/" data-navitem-id="5">
+					Календарь
+				</a>
+			
+			
+		</li>
+	
+	
+
+	
+	
+
+	
+		
+		
+		<li id="elNavSecondary_8" data-role="navBarItem" data-navapp="core" data-navext="StaffDirectory" data-originalwidth="135">
+			
+			
+				<a href="https://it4it.club/staff/" data-navitem-id="8">
+					Администрация
+				</a>
+			
+			
+		</li>
+	
+	
+
+	
+		
+		
+		<li id="elNavSecondary_9" data-role="navBarItem" data-navapp="core" data-navext="OnlineUsers" data-originalwidth="164">
+			
+			
+				<a href="https://it4it.club/online/" data-navitem-id="9">
+					Пользователи в сети
+				</a>
+			
+			
+		</li>
+	
+	
+
+	
+		
+		
+		<li id="elNavSecondary_23" data-role="navBarItem" data-navapp="core" data-navext="CustomItem" data-originalwidth="145">
+			
+			
+				<a href="https://it4it.club/contact/" target="_blank" data-navitem-id="23">
+					Cвязаться с нами
+				</a>
+			
+			
+		</li>
+	
+	
+
+	
+		
+		
+		<li id="elNavSecondary_25" data-role="navBarItem" data-navapp="core" data-navext="CustomItem" data-originalwidth="84">
+			
+			
+				<a href="https://plus.google.com/112383373681400109404/posts" target="_blank" data-navitem-id="25">
+					Google+
+				</a>
+			
+			
+		</li>
+	
+	
+
+	
+		
+		
+		<li id="elNavSecondary_26" data-role="navBarItem" data-navapp="core" data-navext="CustomItem" data-originalwidth="100">
+			
+			
+				<a href="http://vk.com/it4it.club" target="_blank" data-navitem-id="26">
+					ВКонтакте
+				</a>
+			
+			
+		</li>
+	
+	
+
+					<li class="ipsHide" id="elNavigationMore_1" data-role="navMore" style="">
+						<a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#" data-ipsmenu="" data-ipsmenu-appendto="#elNavigationMore_1" id="elNavigationMore_1_dropdown">Больше <i class="fa fa-caret-down"></i></a>
+						<ul class="ipsHide ipsMenu ipsMenu_auto" id="elNavigationMore_1_dropdown_menu" data-role="moreDropdown"></ul>
+					</li>
+				</ul>
+			
+		</li>
+	
+	
+
+	
+		
+		
+		<li id="elNavSecondary_2" data-role="navBarItem" data-navapp="core" data-navext="CustomItem" data-originalwidth="132">
+			
+			
+				<a href="https://it4it.club/discover/" data-navitem-id="2">
+					Активность
+				</a>
+			
+			
+				<ul class="ipsNavBar_secondary ipsHide" data-role="secondaryNavBar">
+					
+
+
+	
+		
+		
+		<li id="elNavSecondary_10" data-role="navBarItem" data-navapp="core" data-navext="AllActivity">
+			
+			
+				<a href="https://it4it.club/discover/" data-navitem-id="10">
+					Вся активность
+				</a>
+			
+			
+		</li>
+	
+	
+
+	
+		
+		
+		<li id="elNavSecondary_11" data-role="navBarItem" data-navapp="core" data-navext="YourActivityStreams">
+			
+			
+				<a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#" data-navitem-id="11">
+					Мои потоки
+				</a>
+			
+			
+		</li>
+	
+	
+
+	
+		
+		
+		<li id="elNavSecondary_12" data-role="navBarItem" data-navapp="core" data-navext="YourActivityStreamsItem">
+			
+			
+				<a href="https://it4it.club/discover/unread/" data-navitem-id="12">
+					Непрочитанное
+				</a>
+			
+			
+		</li>
+	
+	
+
+	
+		
+		
+		<li id="elNavSecondary_13" data-role="navBarItem" data-navapp="core" data-navext="YourActivityStreamsItem">
+			
+			
+				<a href="https://it4it.club/discover/content-started/" data-navitem-id="13">
+					Мои публикации
+				</a>
+			
+			
+		</li>
+	
+	
+
+	
+		
+		
+		<li id="elNavSecondary_14" data-role="navBarItem" data-navapp="core" data-navext="Search">
+			
+			
+				<a href="https://it4it.club/search/" data-navitem-id="14">
+					Поиск
+				</a>
+			
+			
+		</li>
+	
+	
+
+					<li class="ipsHide" id="elNavigationMore_2" data-role="navMore">
+						<a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#" data-ipsmenu="" data-ipsmenu-appendto="#elNavigationMore_2" id="elNavigationMore_2_dropdown">Больше <i class="fa fa-caret-down"></i></a>
+						<ul class="ipsHide ipsMenu ipsMenu_auto" id="elNavigationMore_2_dropdown_menu" data-role="moreDropdown"></ul>
+					</li>
+				</ul>
+			
+		</li>
+	
+	
+
+	
+		
+		
+		<li id="elNavSecondary_28" data-role="navBarItem" data-navapp="core" data-navext="Leaderboard" data-originalwidth="169">
+			
+			
+				<a href="https://it4it.club/leaderboard/" data-navitem-id="28">
+					Таблица лидеров
+				</a>
+			
+			
+		</li>
+	
+	
+
+	
+	
+
+	
+		
+		
+		<li id="elNavSecondary_30" data-role="navBarItem" data-navapp="core" data-navext="Clubs" data-originalwidth="98">
+			
+			
+				<a href="https://it4it.club/clubs/" data-navitem-id="30">
+					Клубы
+				</a>
+			
+			
+		</li>
+	
+	
+
+				<li class="ipsHide" id="elNavigationMore" data-role="navMore" style="">
+					<a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#" data-ipsmenu="" data-ipsmenu-appendto="#elNavigationMore" id="elNavigationMore_dropdown">Больше</a>
+					<ul class="ipsNavBar_secondary ipsHide" data-role="secondaryNavBar">
+						<li class="ipsHide" id="elNavigationMore_more" data-role="navMore">
+							<a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#" data-ipsmenu="" data-ipsmenu-appendto="#elNavigationMore_more" id="elNavigationMore_more_dropdown">Больше <i class="fa fa-caret-down"></i></a>
+							<ul class="ipsHide ipsMenu ipsMenu_auto" id="elNavigationMore_more_dropdown_menu" data-role="moreDropdown"></ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+		</div>
+		<main id="ipsLayout_body" class="ipsLayout_container"><div id="ipsLayout_contentArea">
+				<div id="ipsLayout_contentWrapper">
+					
+<nav class="ipsBreadcrumb ipsBreadcrumb_top ipsFaded_withHover">
+	
+
+	<ul class="ipsList_inline ipsPos_right">
+		
+		<li>
+			<a data-action="defaultStream" class="ipsType_light " href="https://it4it.club/discover/"><i class="icon-newspaper"></i> <span>Вся активность</span></a>
+		</li>
+		
+	</ul>
+
+	<ul data-role="breadcrumbList">
+		<li>
+			<a title="Главная" href="https://it4it.club/">
+				<span><i class="fa fa-home"></i> Главная <i class="fa fa-angle-right"></i></span>
+			</a>
+		</li>
+		
+		
+			<li>
+				
+					<a href="https://it4it.club/forum/15-%D0%BC%D0%B8%D0%BA%D1%80%D0%BE%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D0%BB%D0%B5%D1%80%D1%8B/">
+						<span>Микроконтроллеры <i class="fa fa-angle-right"></i></span>
+					</a>
+				
+			</li>
+		
+			<li>
+				
+					<a href="https://it4it.club/forum/16-arduino/">
+						<span>Arduino <i class="fa fa-angle-right"></i></span>
+					</a>
+				
+			</li>
+		
+			<li>
+				
+					Перепрошивка bootloader (загрузчика)
+				
+			</li>
+		
+	</ul>
+</nav>
+					
+					<div id="ipsLayout_mainArea">
+						<a id="elContent"></a>
+						
+						
+						
+						
+
+	<div class="cWidgetContainer " data-role="widgetReceiver" data-orientation="horizontal" data-widgetarea="header">
+		<ul class="ipsList_reset">
+			
+				
+					
+					<li class="ipsWidget ipsWidget_horizontal ipsBox ipsWidgetHide ipsHide" data-blockid="app_core_announcements_announcements" data-blockconfig="true" data-blocktitle="Объявления" data-blockerrormessage="Этот блок не будет отображён до тех пор, пока не будут установлены его настройки." data-controller="core.front.widgets.block"></li>
+				
+			
+		</ul>
+	</div>
+
+						
+
+
+
+
+
+
+<div class="ipsPageHeader ipsClearfix">
+	
+		<div class="ipsPos_right ipsResponsive_noFloat ipsResponsive_hidePhone">
+			
+
+<div data-followapp="forums" data-followarea="topic" data-followid="19" data-controller="core.front.core.followButton">
+	
+		<span class="ipsType_light ipsType_blendLinks ipsResponsive_hidePhone ipsResponsive_inline"><i class="fa fa-info-circle"></i> <a href="https://it4it.club/login/" title="Перейти на страницу входа">Войдите, чтобы подписаться</a>&nbsp;&nbsp;</span>
+	
+	
+
+	<div class="ipsFollow ipsPos_middle ipsButton ipsButton_link ipsButton_verySmall ipsButton_disabled" data-role="followButton">
+		
+			<span>Подписчики</span>
+			<span class="ipsCommentCount">0</span>
+		
+	</div>
+
+</div>
+		</div>
+		<div class="ipsPos_right ipsResponsive_noFloat ipsResponsive_hidePhone">
+			
+
+
+
+
+
+
+		</div>
+		
+	
+	<div class="ipsPhotoPanel ipsPhotoPanel_small ipsPhotoPanel_notPhone ipsClearfix">
+		
+
+
+	<a href="https://it4it.club/profile/3-kitsum/" data-ipshover="" data-ipshover-target="https://it4it.club/profile/3-kitsum/?do=hovercard" class="ipsUserPhoto ipsUserPhoto_small" title="Перейти в профиль Kitsum">
+		<img src="./Перепрошивка bootloader_files/-KPsq33Xx_Q.jpg" alt="Kitsum">
+	</a>
+
+		<div>
+			<h1 class="ipsType_pageTitle ipsContained_container">
+				
+					
+					
+						<span><span class="ipsBadge ipsBadge_icon ipsBadge_positive" data-ipstooltip="" title="Закреплено"><i class="fa fa-thumb-tack"></i></span></span>
+					
+					
+						<span><span class="ipsBadge ipsBadge_icon ipsBadge_positive" data-ipstooltip="" title="Рекомендуем"><i class="fa fa-star"></i></span></span>
+					
+				
+
+				
+				
+					<span class="ipsType_break ipsContained">
+						<span>Перепрошивка bootloader (загрузчика)</span>
+					</span>
+				
+			</h1>
+			
+			<p class="ipsType_reset ipsType_blendLinks ipsSpacer_bottom ipsSpacer_half">
+				<span class="ipsType_normal">
+				
+					Автор: 
+<a href="https://it4it.club/profile/3-kitsum/" data-ipshover="" data-ipshover-target="https://it4it.club/profile/3-kitsum/?do=hovercard&amp;referrer=https%253A%252F%252Fit4it.club%252Ftopic%252F19-pereproshivka-bootloader-zagruzchika%252F" title="Перейти в профиль Kitsum" class="ipsType_break">Kitsum</a>,  <span class="ipsType_light"><time datetime="2015-10-11T20:05:34Z" title="11.10.2015 20:05 " data-short="2 г">11 октября, 2015</time> в <a href="https://it4it.club/forum/16-arduino/">
+
+<span class="ipsBadge ipsBadge_pill" style="background-color: #00979d; color: #000000;">Arduino</span>
+</a></span>
+				
+				</span>
+				<br>
+			</p>
+			
+				
+
+
+	
+		<ul class="ipsTags ipsList_inline ">
+			
+				
+					
+
+
+<li>
+	<a href="https://it4it.club/tags/arduino/" class="ipsTag" title="Найти другое содержимое с тегом &#39;arduino&#39;" rel="tag"><span>arduino</span></a>
+	
+</li>
+				
+					
+
+
+<li>
+	<a href="https://it4it.club/tags/usbasp/" class="ipsTag" title="Найти другое содержимое с тегом &#39;usbasp&#39;" rel="tag"><span>usbasp</span></a>
+	
+</li>
+				
+					
+
+
+<li>
+	<a href="https://it4it.club/tags/arduinoisp/" class="ipsTag" title="Найти другое содержимое с тегом &#39;arduinoisp&#39;" rel="tag"><span>arduinoisp</span></a>
+	
+</li>
+				
+					
+
+
+<li>
+	<a href="https://it4it.club/tags/arduino%20as%20isp/" class="ipsTag" title="Найти другое содержимое с тегом &#39;arduino as isp&#39;" rel="tag"><span>arduino as isp</span></a>
+	
+</li>
+				
+					
+
+
+<li>
+	<a href="https://it4it.club/tags/bootloader/" class="ipsTag" title="Найти другое содержимое с тегом &#39;bootloader&#39;" rel="tag"><span>bootloader</span></a>
+	
+</li>
+				
+					
+
+
+<li>
+	<a href="https://it4it.club/tags/optiboot/" class="ipsTag" title="Найти другое содержимое с тегом &#39;optiboot&#39;" rel="tag"><span>optiboot</span></a>
+	
+</li>
+				
+			
+			
+		</ul>
+		
+	
+
+			
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+<div class="ipsClearfix">
+	
+		<div class="ipsPos_left ipsType_light ipsResponsive_hidePhone">
+			
+			
+<div class="ipsClearfix ipsRating  ipsRating_veryLarge">
+	
+	<ul class="ipsRating_collective">
+		
+			
+				<li class="ipsRating_on">
+					<i class="fa fa-star"></i>
+				</li>
+			
+		
+			
+				<li class="ipsRating_on">
+					<i class="fa fa-star"></i>
+				</li>
+			
+		
+			
+				<li class="ipsRating_on">
+					<i class="fa fa-star"></i>
+				</li>
+			
+		
+			
+				<li class="ipsRating_on">
+					<i class="fa fa-star"></i>
+				</li>
+			
+		
+			
+				<li class="ipsRating_on">
+					<i class="fa fa-star"></i>
+				</li>
+			
+		
+	</ul>
+</div>
+		</div>
+	
+	
+	<ul class="ipsToolList ipsToolList_horizontal ipsClearfix ipsSpacer_both ipsResponsive_hidePhone">
+		
+		
+		
+	</ul>
+</div>
+
+<div data-controller="core.front.core.commentFeed,forums.front.topic.view, core.front.core.ignoredComments" data-autopoll="" data-baseurl="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/" data-lastpage="" data-feedid="topic-19" class="cTopic ipsClear ipsSpacer_top">
+	
+		
+	
+
+	
+
+<div data-controller="core.front.core.recommendedComments" data-url="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/?recommended=comments" class="ipsAreaBackground ipsPad ipsBox ipsBox_transparent ipsSpacer_bottom ipsRecommendedComments ipsHide">
+	<div data-role="recommendedComments">
+		<h2 class="ipsType_sectionHead ipsType_large">Рекомендуемые сообщения</h2>
+		
+	</div>
+</div>
+	
+	<div data-role="commentFeed" data-controller="core.front.core.moderation">
+		<form action="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/?csrfKey=ccb9bd9ca6920cbbecc170f4987a4cf9&amp;do=multimodComment" method="post" data-ipspageaction="" data-role="moderationTools">
+			
+			
+				
+					
+					
+					
+
+
+
+
+<a id="comment-25"></a>
+<article id="elComment_25" class="cPost ipsBox  ipsComment  ipsComment_parent ipsClearfix ipsClear ipsColumns ipsColumns_noSpacing ipsColumns_collapsePhone  ">
+	
+
+	<div class="cAuthorPane cAuthorPane_mobile ipsResponsive_showPhone ipsResponsive_block">
+		<h3 class="ipsType_sectionHead cAuthorPane_author ipsResponsive_showPhone ipsResponsive_inlineBlock ipsType_break ipsType_blendLinks ipsTruncate ipsTruncate_line">
+			
+<a href="https://it4it.club/profile/3-kitsum/" data-ipshover="" data-ipshover-target="https://it4it.club/profile/3-kitsum/?do=hovercard&amp;referrer=https%253A%252F%252Fit4it.club%252Ftopic%252F19-pereproshivka-bootloader-zagruzchika%252F" title="Перейти в профиль Kitsum" class="ipsType_break"><span style="color:#">Kitsum</span></a>
+			<span class="ipsResponsive_showPhone ipsResponsive_inline">&nbsp;&nbsp;
+
+	
+		<span title="Репутация пользователя" data-ipstooltip="" class="ipsRepBadge ipsRepBadge_positive">
+	
+			<i class="fa fa-plus-circle"></i> 98
+	
+		</span>
+	
+</span>
+		</h3>
+		<div class="cAuthorPane_photo">
+			
+
+
+	<a href="https://it4it.club/profile/3-kitsum/" data-ipshover="" data-ipshover-target="https://it4it.club/profile/3-kitsum/?do=hovercard" class="ipsUserPhoto ipsUserPhoto_large" title="Перейти в профиль Kitsum">
+		<img src="./Перепрошивка bootloader_files/-KPsq33Xx_Q.jpg" alt="Kitsum">
+	</a>
+
+		</div>
+	</div>
+	<aside class="ipsComment_author cAuthorPane ipsColumn ipsColumn_medium ipsResponsive_hidePhone"><h3 class="ipsType_sectionHead cAuthorPane_author ipsType_blendLinks ipsType_break"><strong itemprop="name">
+<a href="https://it4it.club/profile/3-kitsum/" data-ipshover="" data-ipshover-target="https://it4it.club/profile/3-kitsum/?do=hovercard&amp;referrer=https%253A%252F%252Fit4it.club%252Ftopic%252F19-pereproshivka-bootloader-zagruzchika%252F" title="Перейти в профиль Kitsum" class="ipsType_break">Kitsum</a></strong> <span class="ipsResponsive_showPhone ipsResponsive_inline">&nbsp;&nbsp;
+
+	
+		<span title="Репутация пользователя" data-ipstooltip="" class="ipsRepBadge ipsRepBadge_positive">
+	
+			<i class="fa fa-plus-circle"></i> 98
+	
+		</span>
+	
+</span>
+</h3>
+		
+		<ul class="cAuthorPane_info ipsList_reset">
+			
+			
+
+			<li class="cAuthorPane_photo">
+				
+
+
+	<a href="https://it4it.club/profile/3-kitsum/" data-ipshover="" data-ipshover-target="https://it4it.club/profile/3-kitsum/?do=hovercard" class="ipsUserPhoto ipsUserPhoto_large" title="Перейти в профиль Kitsum">
+		<img src="./Перепрошивка bootloader_files/-KPsq33Xx_Q.jpg" alt="Kitsum">
+	</a>
+
+			</li>
+			<li><span style="color:#">Пользователи</span></li>
+			
+			
+				<li>
+
+	
+		<span title="Репутация пользователя" data-ipstooltip="" class="ipsRepBadge ipsRepBadge_positive">
+	
+			<i class="fa fa-plus-circle"></i> 98
+	
+		</span>
+	
+</li>
+				<li class="ipsType_light">178 публикаций</li>
+				
+				
+
+			
+		</ul></aside><div class="ipsColumn ipsColumn_fluid">
+		
+
+<div id="comment-25_wrap" data-controller="core.front.core.comment" data-commentapp="forums" data-commenttype="forums" data-commentid="25" data-quotedata="{&quot;userid&quot;:3,&quot;username&quot;:&quot;Kitsum&quot;,&quot;timestamp&quot;:1444593934,&quot;contentapp&quot;:&quot;forums&quot;,&quot;contenttype&quot;:&quot;forums&quot;,&quot;contentid&quot;:19,&quot;contentclass&quot;:&quot;forums_Topic&quot;,&quot;contentcommentid&quot;:25}" class="ipsComment_content ipsType_medium  ipsFaded_withHover">
+	
+
+	<div class="ipsComment_meta ipsType_light">
+		<div class="ipsPos_right ipsType_light ipsType_reset ipsFaded ipsFaded_more ipsType_blendLinks">
+			<ul class="ipsList_inline ipsComment_tools">
+				
+					<li><a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/?do=reportComment&amp;comment=25" data-ipsdialog="" data-ipsdialog-remotesubmit="" data-ipsdialog-size="medium" data-ipsdialog-flashmessage="Спасибо за вашу жалобу!" data-ipsdialog-title="Жалоба" data-action="reportComment" title="Подать жалобу на публикацию" class="ipsFaded ipsFaded_more"><span class="ipsResponsive_showPhone ipsResponsive_inline"><i class="fa fa-flag"></i></span><span class="ipsResponsive_hidePhone ipsResponsive_inline">Жалоба</span></a></li>
+				
+				
+				
+					<li><a class="ipsType_blendLinks" href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/" data-ipstooltip="" title="Поделиться сообщением" data-ipsmenu="" data-ipsmenu-closeonclick="false" id="elSharePost_25" data-role="shareComment"><i class="fa fa-share-alt"></i></a></li>
+				
+				
+			</ul>
+</div>
+
+		<div class="ipsType_reset">
+			<a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/?do=findComment&amp;comment=25" class="ipsType_blendLinks">Опубликовано: <time datetime="2015-10-11T20:05:34Z" title="11.10.2015 20:05 " data-short="2 г">11 октября, 2015</time></a>
+			<span class="ipsResponsive_hidePhone">
+				
+				
+			</span>
+		</div>
+	</div>
+
+	
+
+
+	<div class="cPost_contentWrap ipsPad">
+		
+		<div data-role="commentContent" class="ipsType_normal ipsType_richText ipsContained" data-controller="core.front.core.lightboxedImages">
+			
+<p>
+	<strong>Update 02.12.2015</strong>
+</p>
+
+<ul>
+<li>
+		Статья переработана и перепроверена
+	</li>
+	<li>
+		Актуально для <strong>Optiboot 6.2</strong> и&nbsp;<strong>Arduino IDE 1.6.6</strong>&nbsp;или выше.
+	</li>
+</ul>
+<p>
+	Рано или поздно приходится столкнуться с необходимостью замены&nbsp;<strong>bootloader</strong> (загрузчика) микроконтроллера. В моём случае остро потребовался функционал загрузчика&nbsp;<a href="https://github.com/Optiboot/optiboot" rel="external nofollow noopener" target="_blank">Optiboot</a>, из-за реализованного в нем сторожевого таймера (<strong>watchdog</strong>). Плюс ко всему, он весит в четыре раза меньше стандартного и освобождает дополнительно <strong>1.5kb</strong> памяти для&nbsp;скетча!
+</p>
+
+<p>
+	Сразу хочу отметить, что <strong>Optiboot</strong> залит&nbsp;по умолчанию на <strong>Arduino UNO</strong> и&nbsp;<span style="color:rgb(67,67,67);font-family:Tahoma, &#39;Helvetica Neue&#39;, Arial, Helvetica, sans-serif;line-height:22.4px;"><strong>Mega 2560</strong>.</span>
+</p>
+
+<p>
+	У меня в наличии имелись: <strong>Arduino Nano</strong>&nbsp;и <strong>Arduino Pro Mini</strong> на чипах <strong>ATmega328P-AU</strong>,&nbsp;и просто пачка&nbsp;"голых" <strong>ATmega328P-PU</strong>. Есть несколько простых способов перезаписать загрузчик которыми я воспользовался (это далеко не все возможные варианты).
+</p>
+
+<p>
+	<span style="color:#008000;"><span style="font-size:18px;"><strong>Использование программатора USBasp</strong></span></span>
+</p>
+
+<p>
+	Как по мне, это самый простой способ не требующий никакой магии. Сам программатор можно приобрести у братьев Китайцев за $2. Он представляет из себя плату с ATmega8 или ATmega128, USB на входе и 10Pin ICSP интерфейс на выходе. От стандартного 6Pin интерфейса он отличается лишь тремя дополнительными пинами GND и одним не использующимся&nbsp;NC. Чтобы упростить себе жизнь, советую сразу брать переходник с <strong>USBasp 10pin to 6pin</strong> за $0.5
+</p>
+
+<p>
+	<em>Выглядит это следующим образом</em>
+</p>
+
+<p>
+	<a class="ipsAttachLink ipsAttachLink_image" href="https://it4it.club/uploads/monthly_2015_10/USBasp_1.jpg.08e0082ca75c57f3c7ba922e03d96131.jpg" data-fileid="80" rel="external noopener" target="_blank" data-ipslightbox="" data-ipslightbox-group="g65029"><img alt="USBasp_1.jpg" class="ipsImage ipsImage_thumbnailed" data-fileid="80" data-unique="kf8tqbh2c" src="./Перепрошивка bootloader_files/USBasp_1.thumb.jpg.8d0c1a12529220afea0d84bcf76c0b6f.jpg"></a>
+</p>
+
+<p>
+	<a class="ipsAttachLink ipsAttachLink_image" href="https://it4it.club/uploads/monthly_2015_10/USBasp_2.jpg.82a7a947ad28b71bc35e3a1803b5c550.jpg" data-fileid="81" rel="external noopener" target="_blank" data-ipslightbox="" data-ipslightbox-group="g65029"><img alt="USBasp_2.jpg" class="ipsImage ipsImage_thumbnailed" data-fileid="81" data-unique="l5l7nf9w8" src="./Перепрошивка bootloader_files/USBasp_2.thumb.jpg.bf9ed94fec6fb570aada4022a1d620db.jpg"></a>
+</p>
+
+<p>
+	<em>Сама распиновка программатора и разъемов (позаимствована у братьев наших)</em>
+</p>
+
+<p>
+	<a class="ipsAttachLink ipsAttachLink_image" href="https://it4it.club/uploads/monthly_2015_10/USBasp_PinoutVisual.jpg.63e32fd24f0b4aad7b1998a17220ce7b.jpg" data-fileid="82" rel="external noopener" target="_blank" data-ipslightbox="" data-ipslightbox-group="g65029"><img alt="USBasp_PinoutVisual.jpg" class="ipsImage ipsImage_thumbnailed" data-fileid="82" src="./Перепрошивка bootloader_files/USBasp_PinoutVisual.thumb.jpg.6c12ea0c22fdd2aedd77c2705c531706.jpg"></a>
+</p>
+
+<p>
+	Если на плате Arduino распаян <strong>6pin</strong> разъем <strong>ICSP</strong>, то подключение до безобразия простое. Совмещаем одноименные контакты программатора с платой Arduino. Если готового разъема нет, то используем соответствующие ноги на плате Arduino или на самом микроконтроллере.
+</p>
+
+<p>
+	Необходимые ноги:
+</p>
+
+<ol>
+<li>
+		<em>GND</em>
+	</li>
+	<li>
+		<em>VCC</em>
+	</li>
+	<li>
+		<em>MOSI</em>
+	</li>
+	<li>
+		<em>MISO</em>
+	</li>
+	<li>
+		<em>RST</em>
+	</li>
+</ol>
+<p>
+	Распиновка некоторых плат Arduino и микроконтроллеров находится в&nbsp;<a href="https://it4it.club/topic/18-%D1%80%D0%B0%D1%81%D0%BF%D0%B8%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%BC%D0%B8%D0%BA%D1%80%D0%BE%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D0%BB%D0%B5%D1%80%D0%BE%D0%B2-%D0%B8-%D0%BF%D0%BB%D0%B0%D1%82-%D0%BD%D0%B0-%D0%B8%D1%85-%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D0%B5/" rel="">соседней теме</a>
+</p>
+
+<div class="ipsSpoiler" data-ipsspoiler="">
+	  <div class="ipsSpoiler_header ipsSpoiler_closed">  <a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#" data-action="toggleSpoiler">&nbsp;</a>  <span>Показать содержимое</span> </div>
+
+	<div class="ipsSpoiler_contents" style="display: none;">
+		<p>
+			<a class="ipsAttachLink ipsAttachLink_image" href="https://it4it.club/uploads/monthly_2015_10/USBasp_3.jpg.79a4432d4511afabbfae28b58c0f72c7.jpg" data-fileid="83" rel="external noopener" target="_blank" data-ipslightbox="" data-ipslightbox-group="g65029"><img alt="USBasp_3.jpg" class="ipsImage ipsImage_thumbnailed" data-fileid="83" src="./Перепрошивка bootloader_files/USBasp_3.thumb.jpg.5390bff3b514b1ec9ab4b297f45cf6a1.jpg"></a><a class="ipsAttachLink ipsAttachLink_image" href="https://it4it.club/uploads/monthly_2015_10/USBasp_4.jpg.dc3b605a7841c8896aefb5cad9f637ef.jpg" data-fileid="84" rel="external noopener" target="_blank" data-ipslightbox="" data-ipslightbox-group="g65029"><img alt="USBasp_4.jpg" class="ipsImage ipsImage_thumbnailed" data-fileid="84" src="./Перепрошивка bootloader_files/USBasp_4.thumb.jpg.333e2a7209d3824219742281e4014ef8.jpg"></a>
+		</p>
+	</div>
+</div>
+
+<p>
+	Пример подключения <strong>USBasp</strong> к <strong>Arduino Pro Mini</strong> и к <strong>ATmega328P-PU</strong>. В случае с последним, конденсаторы можно выкинуть из схемы.
+</p>
+
+<div class="ipsSpoiler" data-ipsspoiler="">
+	  <div class="ipsSpoiler_header ipsSpoiler_closed">  <a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#" data-action="toggleSpoiler">&nbsp;</a>  <span>Показать содержимое</span> </div>
+
+	<div class="ipsSpoiler_contents" style="display: none;">
+		<p>
+			<a class="ipsAttachLink ipsAttachLink_image" href="https://it4it.club/uploads/monthly_2015_10/USBasp_pro_mini.png.3a262179967a6e8b7ad3367e11325537.png" data-fileid="85" rel="external noopener" target="_blank" data-ipslightbox="" data-ipslightbox-group="g65029"><img alt="USBasp_pro_mini.png" class="ipsImage ipsImage_thumbnailed" data-fileid="85" data-unique="2rcyx30bb" src="./Перепрошивка bootloader_files/USBasp_pro_mini.thumb.png.3f38eb346b40cb97f905c5711db148d2.png"></a>
+		</p>
+
+		<p>
+			<a class="ipsAttachLink ipsAttachLink_image" href="https://it4it.club/uploads/monthly_2015_10/USBasp_atmega328p-pu.png.76e8752aff21601a1fdadd8d69688f9e.png" data-fileid="86" rel="external noopener" target="_blank" data-ipslightbox="" data-ipslightbox-group="g65029"><img alt="USBasp_atmega328p-pu.png" class="ipsImage ipsImage_thumbnailed" data-fileid="86" data-unique="be5nnqmrf" src="./Перепрошивка bootloader_files/USBasp_atmega328p-pu.thumb.png.304cf86e3aae53d94acb328fb2b59556.png"></a>
+		</p>
+	</div>
+</div>
+
+<div class="ipsSpoiler" data-ipsspoiler="">
+	  <div class="ipsSpoiler_header ipsSpoiler_closed">  <a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#" data-action="toggleSpoiler">&nbsp;</a>  <span>Показать содержимое</span> </div>
+
+	<div class="ipsSpoiler_contents" style="display: none;">
+		<p>
+			<a class="ipsAttachLink ipsAttachLink_image" href="https://it4it.club/uploads/monthly_2015_10/USBasp_6.jpg.27ff9490fafccea59eb9c057b86ee1f7.jpg" data-fileid="88" rel="external noopener" target="_blank" data-ipslightbox="" data-ipslightbox-group="g65029"><img alt="USBasp_6.jpg" class="ipsImage ipsImage_thumbnailed" data-fileid="88" data-unique="xcepr03un" src="./Перепрошивка bootloader_files/USBasp_6.thumb.jpg.38a994b57f77ae2c0c870ddafc32af2a.jpg"></a><a class="ipsAttachLink ipsAttachLink_image" href="https://it4it.club/uploads/monthly_2015_10/USBasp_5.jpg.9b84534d6e4da141b21b7f6b9cb0eaf6.jpg" data-fileid="87" rel="external noopener" target="_blank" data-ipslightbox="" data-ipslightbox-group="g65029"><img alt="USBasp_5.jpg" class="ipsImage ipsImage_thumbnailed" data-fileid="87" data-unique="yyeeupqol" src="./Перепрошивка bootloader_files/USBasp_5.thumb.jpg.26cf87397533ca8dd73bf01bb939e310.jpg"></a>
+		</p>
+	</div>
+</div>
+
+<p>
+	Теперь самое интересное
+</p>
+
+<ol>
+<li>
+		Переходим на <strong>GitHub</strong> проекта <strong>Optiboot</strong> (ссылка имеется в начале поста) и скачиваем архив со всем необходимым.
+	</li>
+	<li>
+		Переходим в каталог&nbsp;где хранятся созданные вами скетчи (в Windows это "<strong>\Мои документы\Arduino\</strong>") и создаем в нем ветку каталогов&nbsp;<span style="color:#008000;"><strong>\hardware\optiboot\avr\</strong></span>
+	</li>
+	<li>
+		В скачанном архиве находим каталог <strong>optiboot</strong>&nbsp;и переносим все его содержимое в каталог созданный в предыдущем пункте.
+	</li>
+	<li>
+		Среди всех перенесенных файлов находим&nbsp;<span style="color:#008000;"><strong>boards.txt</strong></span>&nbsp;удаляем его. <span style="color:#FF0000;">Он является устаревшим и более нас не интересует!</span>
+	</li>
+	<li>
+		Находим файл&nbsp;<span style="color:#008000;"><strong>boards-1.6.txt</strong></span> и переименовываем в&nbsp;<span style="color:#008000;"><strong>boards.txt</strong></span>, в итоге должно получится как на изображении ниже
+		<div class="ipsSpoiler" data-ipsspoiler="">
+			  <div class="ipsSpoiler_header ipsSpoiler_closed">  <a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#" data-action="toggleSpoiler">&nbsp;</a>  <span>Показать содержимое</span> </div>
+
+			<div class="ipsSpoiler_contents" style="display: none;">
+				<p>
+					<a href="./Перепрошивка bootloader_files/Arduino_optiboot_1.png.5a3bdbee15e8e102b32f687560e5844a.png" title="Увеличить изображение" data-ipslightbox="" data-ipslightbox-group="g65029"><img alt="Arduino_optiboot_1.png" class="ipsImage ipsImage_thumbnailed" data-fileid="170" data-unique="e1ja01o7q" src="./Перепрошивка bootloader_files/Arduino_optiboot_1.png.5a3bdbee15e8e102b32f687560e5844a.png"></a></p>
+			</div>
+		</div>
+
+		<p>
+			&nbsp;
+		</p>
+	</li>
+	<li>
+		Перезапускаем срезу <strong>Arduino IDE</strong>
+	</li>
+	<li>
+		Проверяем список плат&nbsp;во вкладке "Инструменты" и наслаждаемся результатом
+	</li>
+</ol>
+<div class="ipsSpoiler" data-ipsspoiler="">
+	  <div class="ipsSpoiler_header ipsSpoiler_closed">  <a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#" data-action="toggleSpoiler">&nbsp;</a>  <span>Показать содержимое</span> </div>
+
+	<div class="ipsSpoiler_contents" style="display: none;">
+		<p>
+			<a class="ipsAttachLink ipsAttachLink_image" href="https://it4it.club/uploads/monthly_2015_12/optiboot_1.png.0db465f315383552d096c77efa3e67b6.png" data-fileid="171" rel="external noopener" target="_blank" data-ipslightbox="" data-ipslightbox-group="g65029"><img alt="optiboot_1.png" class="ipsImage ipsImage_thumbnailed" data-fileid="171" data-unique="3yy7e6alm" src="./Перепрошивка bootloader_files/optiboot_1.thumb.png.79cc31cde547460bb5af9f75c16a2d99.png"></a>
+		</p>
+
+		<p>
+			<a class="ipsAttachLink ipsAttachLink_image" href="https://it4it.club/uploads/monthly_2015_12/optiboot_2.png.7cdc7ab4a3f2d1181d4612ed821161a4.png" data-fileid="172" rel="external noopener" target="_blank" data-ipslightbox="" data-ipslightbox-group="g65029"><img alt="optiboot_2.png" class="ipsImage ipsImage_thumbnailed" data-fileid="172" data-unique="pkecp5zq7" src="./Перепрошивка bootloader_files/optiboot_2.thumb.png.ef8407fb4b023bab45a59ad7a4ab657c.png"></a>
+		</p>
+
+		<p>
+			<a class="ipsAttachLink ipsAttachLink_image" href="https://it4it.club/uploads/monthly_2015_12/optiboot_3.png.dc6d70bb76be258a2d7b28d8ab04fdd2.png" data-fileid="173" rel="external noopener" target="_blank" data-ipslightbox="" data-ipslightbox-group="g65029"><img alt="optiboot_3.png" class="ipsImage ipsImage_thumbnailed" data-fileid="173" data-unique="h71wvw9mu" src="./Перепрошивка bootloader_files/optiboot_3.thumb.png.62c612a4f5d1bf1fc1b7c35ad661ebdb.png"></a>
+		</p>
+
+		<p>
+			&nbsp;
+		</p>
+	</div>
+</div>
+
+<p>
+	При хранении всех необходимых файлов вне среды разработки <strong>Arduino IDE</strong> последующее обновление самой среды не позволит Вам потерять настройки и файлы загрузчика <strong>Optiboot</strong> в отличие от прямого вмешательства в оригинальный&nbsp;<strong>boards.txt</strong>
+</p>
+
+<p>
+	Ленивые могут забрать готовый архив со всеми изменениями и распаковать&nbsp;его содержимое в папку со скетчами. В данном случае все достаточно только перезапустить среду разработки. Сам архив прикреплен к посту.
+</p>
+
+<p>
+	Выбираем программатор <strong>USBasp</strong>
+</p>
+
+<p>
+	<a class="ipsAttachLink ipsAttachLink_image" href="https://it4it.club/uploads/monthly_2015_12/optiboot_4.png.471ccfbedbac9488719011ff6a566ec5.png" data-fileid="174" rel="external noopener" target="_blank" data-ipslightbox="" data-ipslightbox-group="g65029"><img alt="optiboot_4.png" class="ipsImage ipsImage_thumbnailed" data-fileid="174" data-unique="fbkr6ridy" src="./Перепрошивка bootloader_files/optiboot_4.thumb.png.377d611784860037e2bc4a702d0800ea.png"></a>
+</p>
+
+<p>
+	И жмем "Записать загрузчик".
+</p>
+
+<p>
+	<span style="color:#FF0000;"><strong>ВАЖНО:</strong></span> Если желаете залить скетч через <strong>USBasp</strong>, то необходимо нажимать "<strong>Записать\Вгрузить</strong>" при зажатой клавиши <strong>SHIFT</strong>. Только в этом случае будет выбран <u>программатор</u> для заливки, а соответствующая подсказка изменится за "<strong>Загрузить через программатор</strong>".
+</p>
+
+<p>
+	<a class="ipsAttachLink ipsAttachLink_image" href="https://it4it.club/uploads/monthly_2015_10/Arduino_optiboot_4.png.1e2e584b94c1645b8670fee1a3d12894.png" data-fileid="91" rel="external noopener" target="_blank" data-ipslightbox="" data-ipslightbox-group="g65029"><img alt="Arduino_optiboot_4.png" class="ipsImage ipsImage_thumbnailed" data-fileid="91" data-unique="s09ftf3vx" src="./Перепрошивка bootloader_files/Arduino_optiboot_4.thumb.png.53904dfbaba9665af60ee0748942aa98.png"></a>
+</p>
+
+<p>
+	В ходе данной операции могут сыпаться ошибки указывающие на проблемы с <strong>USBasp</strong>.
+</p>
+
+<blockquote class="ipsQuote" data-ipsquote="">
+	  <div class="ipsQuote_citation ipsQuote_open">  <a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#" data-action="toggleQuote">&nbsp;</a>    
+		Цитата
+	 </div>
+
+	<div class="ipsQuote_contents ipsClearfix">
+		<p>
+			avrdude: warning: cannot set sck period. please check for usbasp firmware update.
+		</p>
+	</div>
+</blockquote>
+
+<p>
+	Попросту игнорируем их!
+</p>
+
+<p>
+	<span style="color:#008000;"><span style="font-size:18px;"><strong>Использование Arduino в качестве программатора</strong></span></span>
+</p>
+
+<p>
+	Нам понадобится вторая плата Arduino. Прошиваем её скетчем <strong>ArduinoISP</strong>, идущим по умолчанию со средой разработки. После этого Arduino становится полноценным программатором.
+</p>
+
+<pre class="ipsCode prettyprint prettyprinted"><span>// pin name:    not-mega:         mega(1280 and 2560)</span><span>
+</span><span>// slave reset: 10:               53</span><span>
+</span><span>// MOSI:        11:               51</span><span>
+</span><span>// MISO:        12:               50</span><span>
+</span><span>// SCK:         13:               52</span></pre>
+
+<p>
+	В скетче имеется подсказка с способом подключения.
+</p>
+
+<div class="ipsSpoiler" data-ipsspoiler="">
+	  <div class="ipsSpoiler_header ipsSpoiler_closed">  <a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#" data-action="toggleSpoiler">&nbsp;</a>  <span>Показать содержимое</span> </div>
+
+	<div class="ipsSpoiler_contents" style="display: none;">
+		<p>
+			<a class="ipsAttachLink ipsAttachLink_image" href="https://it4it.club/uploads/monthly_2015_10/Arduino_isp_1.png.29e3f3a8cdf25e440a07a42a2f256a53.png" data-fileid="92" rel="external noopener" target="_blank" data-ipslightbox="" data-ipslightbox-group="g65029"><img alt="Arduino_isp_1.png" class="ipsImage ipsImage_thumbnailed" data-fileid="92" data-unique="mpzy21pbm" src="./Перепрошивка bootloader_files/Arduino_isp_1.thumb.png.dce98f2285e51eb409e08022e7886e40.png"></a>
+		</p>
+	</div>
+</div>
+
+<div class="ipsSpoiler" data-ipsspoiler="">
+	  <div class="ipsSpoiler_header ipsSpoiler_closed">  <a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#" data-action="toggleSpoiler">&nbsp;</a>  <span>Показать содержимое</span> </div>
+
+	<div class="ipsSpoiler_contents" style="display: none;">
+		<p>
+			<a class="ipsAttachLink ipsAttachLink_image" href="https://it4it.club/uploads/monthly_2015_10/Arduino_isp_2.jpg.4f045946c7dc6c423da7f1be11c0aafb.jpg" data-fileid="93" rel="external noopener" target="_blank" data-ipslightbox="" data-ipslightbox-group="g65029"><img alt="Arduino_isp_2.jpg" class="ipsImage ipsImage_thumbnailed" data-fileid="93" data-unique="3fuuce0bq" src="./Перепрошивка bootloader_files/Arduino_isp_2.thumb.jpg.d077eb75dcaddf7bded701176ec8deb0.jpg"></a>
+		</p>
+	</div>
+</div>
+
+<p>
+	Изменяем в Arduino IDE программатор на&nbsp;&nbsp;<strong>Arduino as ISP</strong>, выбираем необходимую плату, к которой подключен наш вновь испеченный программатор и "прожигаем" загрузчик.
+</p>
+
+<p>
+	<a class="ipsAttachLink ipsAttachLink_image" href="https://it4it.club/uploads/monthly_2015_10/Arduino_isp_3.png.c50f7691be16c764bab20f137df0ac4c.png" data-fileid="94" rel="external noopener" target="_blank" data-ipslightbox="" data-ipslightbox-group="g65029"><img alt="Arduino_isp_3.png" class="ipsImage ipsImage_thumbnailed" data-fileid="94" data-unique="83jgiqr2s" src="./Перепрошивка bootloader_files/Arduino_isp_3.thumb.png.52f6630a545baf1ad8082295b0223f17.png"></a>
+</p>
+
+<p>
+	Если необходимо записать какой либо скетч, то делаем это также при зажатой клавиши <strong>SHIFT</strong> (как и в первом варианте).
+</p>
+
+<p>
+	<strong>PS:</strong>&nbsp;По умолчанию в среде разработки имеются файлы загрузчика <strong>optiboot</strong> и скачивать ничего не нужно. Достаточно выбрать плату <strong>Arduino UNO</strong> и перезаписать загрузчик. Но в этом случае Ваше детище станет определяться именно как <strong>UNO</strong>, даже если на самом деле это <strong>NANO</strong>, <strong>Pro Mini</strong> или еще что-то.
+</p>
+
+<p>
+	<a class="ipsAttachLink" href="https://it4it.club/applications/core/interface/file/attachment.php?id=175" data-fileid="175" rel="">hardware.zip</a>
+</p>
+
+
+			
+		</div>
+
+		<div class="ipsItemControls">
+			
+				
+					
+
+	<div data-controller="core.front.core.reaction" class="ipsItemControls_right ipsClearfix ">	
+		<div class="ipsReact ipsPos_right">
+			
+				<div class="ipsReact_blurb " data-role="reactionBlurb">
+					
+						
+
+
+	<ul class="ipsReact_reactions">
+	
+		
+		<li class="ipsReact_reactCount">
+			
+				<span data-ipstooltip="" title="Like">
+			
+					<span>
+						<img src="./Перепрошивка bootloader_files/react_like.png" alt="Like">
+					</span>
+					<span>
+						1
+					</span>
+			
+				</span>
+			
+		</li>
+	
+	</ul>
+
+<div class="ipsReact_overview ipsType_blendLinks">
+	
+	
+</div>
+					
+				</div>
+			
+			
+			
+		</div>
+	</div>
+
+
+				
+			
+			<ul class="ipsComment_controls ipsClearfix ipsItemControls_left" data-role="commentControls">
+				
+					
+					
+					
+				
+				<li class="ipsHide" data-role="commentLoading">
+					<span class="ipsLoading ipsLoading_tiny ipsLoading_noAnim"></span>
+				</li>
+			</ul>
+</div>
+
+		
+			
+
+		
+	</div>
+
+	<div class="ipsMenu ipsMenu_wide ipsHide cPostShareMenu" id="elSharePost_25_menu">
+		<div class="ipsPad">
+			<h4 class="ipsType_sectionHead">Поделиться сообщением</h4>
+			<hr class="ipsHr">
+<h5 class="ipsType_normal ipsType_reset">Ссылка на сообщение</h5>
+			
+			<input type="text" value="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/" class="ipsField_fullWidth">
+			
+
+			
+				<h5 class="ipsType_normal ipsType_reset ipsSpacer_top">Поделиться на других сайтах</h5>
+				
+
+	<ul class="ipsList_inline ipsList_noSpacing ipsClearfix" data-controller="core.front.core.sharelink">
+		
+			<li>
+<a href="http://twitter.com/share?text=%D0%9F%D0%B5%D1%80%D0%B5%D0%BF%D1%80%D0%BE%D1%88%D0%B8%D0%B2%D0%BA%D0%B0%20bootloader%20%28%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D1%87%D0%B8%D0%BA%D0%B0%29&amp;url=https%3A%2F%2Fit4it.club%2Ftopic%2F19-pereproshivka-bootloader-zagruzchika%2F%3Fdo%3DfindComment%26comment%3D25" class="cShareLink cShareLink_twitter" target="_blank" data-role="shareLink" title="Поделиться в Twitter" data-ipstooltip="" rel="noopener noreferrer">
+	<i class="fa fa-twitter"></i>
+</a>
+<a href="http://vk.com/share.php?url=https%3A%2F%2Fit4it.club%2Ftopic%2F19-pereproshivka-bootloader-zagruzchika%2F%3Fdo%3DfindComment%26comment%3D25&amp;text=%D0%9F%D0%B5%D1%80%D0%B5%D0%BF%D1%80%D0%BE%D1%88%D0%B8%D0%B2%D0%BA%D0%B0%20bootloader%20%28%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D1%87%D0%B8%D0%BA%D0%B0%29&amp;noparse=false" class="cShareLink cShareLink_vk" target="_blank" data-role="shareLink" title="Опубликовать ВКонтакте" data-ipstooltip="">
+	<i class="fa fa-vk"></i>
+</a>
+<a href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&amp;st.s=1&amp;st._surl=https%3A%2F%2Fit4it.club%2Ftopic%2F19-pereproshivka-bootloader-zagruzchika%2F%3Fdo%3DfindComment%26comment%3D25&amp;st.comments=%D0%9F%D0%B5%D1%80%D0%B5%D0%BF%D1%80%D0%BE%D1%88%D0%B8%D0%B2%D0%BA%D0%B0%20bootloader%20%28%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D1%87%D0%B8%D0%BA%D0%B0%29" class="cShareLink cShareLink_odnoklassniki" target="_blank" data-role="shareLink" title="Рассказать одноклассникам" data-ipstooltip="">
+	<i class="fa fa-odnoklassniki"></i>
+</a></li>
+		
+			<li>
+<a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fit4it.club%2Ftopic%2F19-pereproshivka-bootloader-zagruzchika%2F%3Fdo%3DfindComment%26comment%3D25" class="cShareLink cShareLink_facebook" target="_blank" data-role="shareLink" title="Поделиться в Facebook" data-ipstooltip="" rel="noopener">
+	<i class="fa fa-facebook"></i>
+</a></li>
+		
+			<li>
+<a href="https://plus.google.com/share?url=https%3A%2F%2Fit4it.club%2Ftopic%2F19-pereproshivka-bootloader-zagruzchika%2F%3Fdo%3DfindComment%26comment%3D25" class="cShareLink cShareLink_google" target="_blank" data-role="shareLink" title="Поделиться в Google+" data-ipstooltip="" rel="noopener noreferrer">
+	<i class="fa fa-google-plus"></i>
+</a>
+<a href="https://telegram.me/share/url?url=https%3A%2F%2Fit4it.club%2Ftopic%2F19-pereproshivka-bootloader-zagruzchika%2F%3Fdo%3DfindComment%26comment%3D25&amp;text=" class="cShareLink cShareLink_telegram" target="_blank" data-role="shareLink" title="Поделиться с собеседниками в Телеграм" data-ipstooltip="">
+	<i class="fa fa-paper-plane"></i>
+</a>
+<a href="https://getpocket.com/edit?url=https%3A%2F%2Fit4it.club%2Ftopic%2F19-pereproshivka-bootloader-zagruzchika%2F%3Fdo%3DfindComment%26comment%3D25&amp;title=" class="cShareLink cShareLink_get_pocket" target="_blank" data-role="shareLink" title="Добавить ссылку в Pocket" data-ipstooltip="">
+	<i class="fa fa-get-pocket"></i>
+</a></li>
+		
+			<li>
+<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fit4it.club%2Ftopic%2F19-pereproshivka-bootloader-zagruzchika%2F%3Fdo%3DfindComment%26comment%3D25&amp;title=%D0%9F%D0%B5%D1%80%D0%B5%D0%BF%D1%80%D0%BE%D1%88%D0%B8%D0%B2%D0%BA%D0%B0+bootloader+%28%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D1%87%D0%B8%D0%BA%D0%B0%29" class="cShareLink cShareLink_linkedin" target="_blank" data-role="shareLink" title="Поделиться в LinkedIn" data-ipstooltip="" rel="noopener">
+	<i class="fa fa-linkedin"></i>
+</a></li>
+		
+			<li>
+<a href="http://pinterest.com/pin/create/button/?url=https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/?do=findComment%26comment=25&amp;media=" class="cShareLink cShareLink_pinterest" target="_blank" data-role="shareLink" title="Поделиться в Pinterest" data-ipstooltip="" rel="noopener">
+	<i class="fa fa-pinterest"></i>
+</a></li>
+		
+	</ul>
+
+			
+		</div>
+	</div>
+</div>
+
+	</div>
+</article>
+
+					
+				
+					
+					
+					
+
+
+
+
+<a id="comment-45"></a>
+<article id="elComment_45" class="cPost ipsBox  ipsComment  ipsComment_parent ipsClearfix ipsClear ipsColumns ipsColumns_noSpacing ipsColumns_collapsePhone  ">
+	
+
+	<div class="cAuthorPane cAuthorPane_mobile ipsResponsive_showPhone ipsResponsive_block">
+		<h3 class="ipsType_sectionHead cAuthorPane_author ipsResponsive_showPhone ipsResponsive_inlineBlock ipsType_break ipsType_blendLinks ipsTruncate ipsTruncate_line">
+			
+<a href="https://it4it.club/profile/3-kitsum/" data-ipshover="" data-ipshover-target="https://it4it.club/profile/3-kitsum/?do=hovercard&amp;referrer=https%253A%252F%252Fit4it.club%252Ftopic%252F19-pereproshivka-bootloader-zagruzchika%252F" title="Перейти в профиль Kitsum" class="ipsType_break"><span style="color:#">Kitsum</span></a>
+			<span class="ipsResponsive_showPhone ipsResponsive_inline">&nbsp;&nbsp;
+
+	
+		<span title="Репутация пользователя" data-ipstooltip="" class="ipsRepBadge ipsRepBadge_positive">
+	
+			<i class="fa fa-plus-circle"></i> 98
+	
+		</span>
+	
+</span>
+		</h3>
+		<div class="cAuthorPane_photo">
+			
+
+
+	<a href="https://it4it.club/profile/3-kitsum/" data-ipshover="" data-ipshover-target="https://it4it.club/profile/3-kitsum/?do=hovercard" class="ipsUserPhoto ipsUserPhoto_large" title="Перейти в профиль Kitsum">
+		<img src="./Перепрошивка bootloader_files/-KPsq33Xx_Q.jpg" alt="Kitsum">
+	</a>
+
+		</div>
+	</div>
+	<aside class="ipsComment_author cAuthorPane ipsColumn ipsColumn_medium ipsResponsive_hidePhone"><h3 class="ipsType_sectionHead cAuthorPane_author ipsType_blendLinks ipsType_break"><strong itemprop="name">
+<a href="https://it4it.club/profile/3-kitsum/" data-ipshover="" data-ipshover-target="https://it4it.club/profile/3-kitsum/?do=hovercard&amp;referrer=https%253A%252F%252Fit4it.club%252Ftopic%252F19-pereproshivka-bootloader-zagruzchika%252F" title="Перейти в профиль Kitsum" class="ipsType_break">Kitsum</a></strong> <span class="ipsResponsive_showPhone ipsResponsive_inline">&nbsp;&nbsp;
+
+	
+		<span title="Репутация пользователя" data-ipstooltip="" class="ipsRepBadge ipsRepBadge_positive">
+	
+			<i class="fa fa-plus-circle"></i> 98
+	
+		</span>
+	
+</span>
+</h3>
+		
+		<ul class="cAuthorPane_info ipsList_reset">
+			
+			
+
+			<li class="cAuthorPane_photo">
+				
+
+
+	<a href="https://it4it.club/profile/3-kitsum/" data-ipshover="" data-ipshover-target="https://it4it.club/profile/3-kitsum/?do=hovercard" class="ipsUserPhoto ipsUserPhoto_large" title="Перейти в профиль Kitsum">
+		<img src="./Перепрошивка bootloader_files/-KPsq33Xx_Q.jpg" alt="Kitsum">
+	</a>
+
+			</li>
+			<li><span style="color:#">Пользователи</span></li>
+			
+			
+				<li>
+
+	
+		<span title="Репутация пользователя" data-ipstooltip="" class="ipsRepBadge ipsRepBadge_positive">
+	
+			<i class="fa fa-plus-circle"></i> 98
+	
+		</span>
+	
+</li>
+				<li class="ipsType_light">178 публикаций</li>
+				
+				
+
+			
+		</ul></aside><div class="ipsColumn ipsColumn_fluid">
+		
+
+<div id="comment-45_wrap" data-controller="core.front.core.comment" data-commentapp="forums" data-commenttype="forums" data-commentid="45" data-quotedata="{&quot;userid&quot;:3,&quot;username&quot;:&quot;Kitsum&quot;,&quot;timestamp&quot;:1453413039,&quot;contentapp&quot;:&quot;forums&quot;,&quot;contenttype&quot;:&quot;forums&quot;,&quot;contentid&quot;:19,&quot;contentclass&quot;:&quot;forums_Topic&quot;,&quot;contentcommentid&quot;:45}" class="ipsComment_content ipsType_medium  ipsFaded_withHover">
+	
+
+	<div class="ipsComment_meta ipsType_light">
+		<div class="ipsPos_right ipsType_light ipsType_reset ipsFaded ipsFaded_more ipsType_blendLinks">
+			<ul class="ipsList_inline ipsComment_tools">
+				
+					<li><a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/?do=reportComment&amp;comment=45" data-ipsdialog="" data-ipsdialog-remotesubmit="" data-ipsdialog-size="medium" data-ipsdialog-flashmessage="Спасибо за вашу жалобу!" data-ipsdialog-title="Жалоба" data-action="reportComment" title="Подать жалобу на публикацию" class="ipsFaded ipsFaded_more"><span class="ipsResponsive_showPhone ipsResponsive_inline"><i class="fa fa-flag"></i></span><span class="ipsResponsive_hidePhone ipsResponsive_inline">Жалоба</span></a></li>
+				
+				
+				
+					<li><a class="ipsType_blendLinks" href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/?do=findComment&amp;comment=45" data-ipstooltip="" title="Поделиться сообщением" data-ipsmenu="" data-ipsmenu-closeonclick="false" id="elSharePost_45" data-role="shareComment"><i class="fa fa-share-alt"></i></a></li>
+				
+				
+			</ul>
+</div>
+
+		<div class="ipsType_reset">
+			<a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/?do=findComment&amp;comment=45" class="ipsType_blendLinks">Опубликовано: <time datetime="2016-01-21T21:50:39Z" title="21.01.2016 21:50 " data-short="1 г">21 января, 2016</time></a>
+			<span class="ipsResponsive_hidePhone">
+				
+				
+			</span>
+		</div>
+	</div>
+
+	
+
+
+	<div class="cPost_contentWrap ipsPad">
+		
+		<div data-role="commentContent" class="ipsType_normal ipsType_richText ipsContained" data-controller="core.front.core.lightboxedImages">
+			
+<p>
+	<strong>Установка драйверов USBasp для Windows 10 / 8.1 / 8</strong>
+</p>
+
+<p>
+	<a href="./Перепрошивка bootloader_files/usbasp-driver.png.4e6331c712f4eb0019b72556b806fcad.png" title="Увеличить изображение" data-ipslightbox="" data-ipslightbox-group="g73531"><img alt="usbasp-driver.png.4e6331c712f4eb0019b725" class="ipsImage ipsImage_thumbnailed" data-fileid="197" data-unique="rzrd3a1qc" src="./Перепрошивка bootloader_files/usbasp-driver.png.4e6331c712f4eb0019b72556b806fcad.png"></a></p>
+
+<p>
+	По существу установка драйвера проста, но во время установки происходит отказ т.к официальные драйвера не имеют цифровой подписи. Чтобы решить данную задачу, необходимо временно отключить обязательную проверку подписи драйверов.
+</p>
+
+<p>
+	Для начала, необходимо скачать сами драйвера. Для этого идем на <a href="http://www.fischl.de/usbasp/" rel="external nofollow noopener" target="_blank">официальный сайт разработчика</a> (автор&nbsp;<strong>Thomas Fischl</strong>), скачиваем архив с последней обновленной версией и&nbsp;распаковываем в удобную для Вас директорию.
+</p>
+
+<p>
+	Теперь нажимаем и удерживая&nbsp;клавишу <strong>SHIFT</strong> отправляем компьютер на перезагрузку. Это заставит Windows выйти в режим восстановления.
+</p>
+
+<div class="ipsSpoiler" data-ipsspoiler="">
+	  <div class="ipsSpoiler_header ipsSpoiler_closed">  <a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#" data-action="toggleSpoiler">&nbsp;</a>  <span>Показать содержимое</span> </div>
+
+	<div class="ipsSpoiler_contents" style="display: none;">
+		<p>
+			<strong>Альтернативный вариант</strong>
+		</p>
+
+		<ol><li>
+				Нажимаем сочетание клавиш WIN + I для появления окна параметров системы
+			</li>
+			<li>
+				Выбираем пункт "Обновление и безопасность"
+			</li>
+			<li>
+				Выбираем раздел "Восстановление"
+			</li>
+			<li>
+				В параграфе "Особые варианты загрузки" жмем кнопку "Перезагрузить сейчас"
+			</li>
+		</ol><p>
+			<a class="ipsAttachLink ipsAttachLink_image" href="https://it4it.club/uploads/monthly_2016_01/usbasp-driver-0.png.479cfd8df68a6c8181d077959b4da8d0.png" data-ipslightbox="" data-ipslightbox-group="g73531"><img alt="usbasp-driver-0.thumb.png.2f178ff77928eb" class="ipsImage ipsImage_thumbnailed" data-fileid="194" data-unique="u7lullmc9" src="./Перепрошивка bootloader_files/usbasp-driver-0.thumb.png.2f178ff77928eb74be21bf60cd5fd06c.png"></a>
+		</p>
+
+		<p>
+			<a class="ipsAttachLink ipsAttachLink_image" href="https://it4it.club/uploads/monthly_2016_01/usbasp-driver-1.png.72bf24e1db72b253ef293691d7dbb138.png" data-ipslightbox="" data-ipslightbox-group="g73531"><img alt="usbasp-driver-1.thumb.png.55776801c3d086" class="ipsImage ipsImage_thumbnailed" data-fileid="196" data-unique="gpxu7ex12" src="./Перепрошивка bootloader_files/usbasp-driver-1.thumb.png.55776801c3d0865fb3d9e73bc31a24e9.png"></a>
+		</p>
+	</div>
+</div>
+
+<p>
+	После этого мы попадаем в режим восстановления. Выбираем "Поиск и устранение неисправностей".
+</p>
+
+<div class="ipsSpoiler" data-ipsspoiler="">
+	  <div class="ipsSpoiler_header ipsSpoiler_closed">  <a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#" data-action="toggleSpoiler">&nbsp;</a>  <span>Показать содержимое</span> </div>
+
+	<div class="ipsSpoiler_contents" style="display: none;">
+		<p>
+			<a class="ipsAttachLink ipsAttachLink_image" href="https://it4it.club/uploads/monthly_2016_01/usbasp-driver-2.png.3e5caf287f9a48b10569a22d2f79d6e7.png" data-ipslightbox="" data-ipslightbox-group="g73531"><img alt="usbasp-driver-2.thumb.png.67bbd4bfe5897c" class="ipsImage ipsImage_thumbnailed" data-fileid="198" data-unique="98s8puwr1" src="./Перепрошивка bootloader_files/usbasp-driver-2.thumb.png.67bbd4bfe5897cc5f9b2b1b93ae15747.png"></a>
+		</p>
+	</div>
+</div>
+
+<p>
+	Выбираем "Дополнительные параметры".
+</p>
+
+<div class="ipsSpoiler" data-ipsspoiler="">
+	  <div class="ipsSpoiler_header ipsSpoiler_closed">  <a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#" data-action="toggleSpoiler">&nbsp;</a>  <span>Показать содержимое</span> </div>
+
+	<div class="ipsSpoiler_contents" style="display: none;">
+		<p>
+			<a class="ipsAttachLink ipsAttachLink_image" href="https://it4it.club/uploads/monthly_2016_01/usbasp-driver-3.png.568e99cc9fcd8211b030a4c7b3374978.png" data-ipslightbox="" data-ipslightbox-group="g73531"><img alt="usbasp-driver-3.thumb.png.78cb3145bcf760" class="ipsImage ipsImage_thumbnailed" data-fileid="199" data-unique="npcu83fne" src="./Перепрошивка bootloader_files/usbasp-driver-3.thumb.png.78cb3145bcf760e1375f5bfb4abbd0b6.png"></a>
+		</p>
+	</div>
+</div>
+
+<p>
+	Выбираем "Параметры загрузки".
+</p>
+
+<div class="ipsSpoiler" data-ipsspoiler="">
+	  <div class="ipsSpoiler_header ipsSpoiler_closed">  <a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#" data-action="toggleSpoiler">&nbsp;</a>  <span>Показать содержимое</span> </div>
+
+	<div class="ipsSpoiler_contents" style="display: none;">
+		<p>
+			<a class="ipsAttachLink ipsAttachLink_image" href="https://it4it.club/uploads/monthly_2016_01/usbasp-driver-4.png.2e07a7fa665f4d59c8c0e77227f9368a.png" data-ipslightbox="" data-ipslightbox-group="g73531"><img alt="usbasp-driver-4.thumb.png.a00af803205e45" class="ipsImage ipsImage_thumbnailed" data-fileid="200" data-unique="6ljc18tym" src="./Перепрошивка bootloader_files/usbasp-driver-4.thumb.png.a00af803205e4501a656fae73725e33e.png"></a>
+		</p>
+	</div>
+</div>
+
+<p>
+	Отправляем компьютер на перезагрузку.
+</p>
+
+<div class="ipsSpoiler" data-ipsspoiler="">
+	  <div class="ipsSpoiler_header ipsSpoiler_closed">  <a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#" data-action="toggleSpoiler">&nbsp;</a>  <span>Показать содержимое</span> </div>
+
+	<div class="ipsSpoiler_contents" style="display: none;">
+		<p>
+			<a class="ipsAttachLink ipsAttachLink_image" href="https://it4it.club/uploads/monthly_2016_01/usbasp-driver-5.png.e064995fb68e50e8689234e512d2afab.png" data-ipslightbox="" data-ipslightbox-group="g73531"><img alt="usbasp-driver-5.thumb.png.eec1070a089994" class="ipsImage ipsImage_thumbnailed" data-fileid="201" data-unique="vswq08wft" src="./Перепрошивка bootloader_files/usbasp-driver-5.thumb.png.eec1070a08999486432222eef5804103.png"></a>
+		</p>
+	</div>
+</div>
+
+<p>
+	После всех этим манипуляций мы попадаем в меню выбора параметров загрузки. Выбрать один из перечисленных вариантов можно клавишами от <strong>F1</strong> до&nbsp;<strong>F9</strong>, но нас интересует вариант <strong>F7</strong> - "отключить обязательную проверку подписи драйверов".
+</p>
+
+<p>
+	<a class="ipsAttachLink ipsAttachLink_image" href="https://it4it.club/uploads/monthly_2016_01/usbasp-driver-6.png.b66b6ad768ab954c01f225a7c1df1586.png" data-ipslightbox="" data-ipslightbox-group="g73531"><img alt="usbasp-driver-6.thumb.png.492e33650734ae" class="ipsImage ipsImage_thumbnailed" data-fileid="202" data-unique="ryu4ug4hu" src="./Перепрошивка bootloader_files/usbasp-driver-6.thumb.png.492e33650734ae0df651c43cd9ab499a.png"></a>
+</p>
+
+<p>
+	Далее все по стандарту. Идем в список устройств, ищем наш не установленный <strong>USBasp</strong> программатор и обновляем драйвер с локального компьютера указав путь до распакованного ранее архива.
+</p>
+
+<p>
+	Во время установки драйвера Вы увидите предупреждение об отсутствии электронной подписи. Игнорируем его и продолжаем установку.
+</p>
+
+<p>
+	<a href="./Перепрошивка bootloader_files/usbasp-driver-7.png.05a7c0cd440cde46c5319407ad629cdb.png" title="Увеличить изображение" data-ipslightbox="" data-ipslightbox-group="g73531"><img alt="usbasp-driver-7.png.05a7c0cd440cde46c531" class="ipsImage ipsImage_thumbnailed" data-fileid="203" data-unique="aezaa9kgb" src="./Перепрошивка bootloader_files/usbasp-driver-7.png.05a7c0cd440cde46c5319407ad629cdb.png"></a></p>
+
+<p>
+	После этих, не хитрых манипуляций, мы получаем установленный в системе <strong>USBasp</strong> программатор.
+</p>
+
+<p>
+	<strong>PS</strong>: наслаждаемся результатом.
+</p>
+
+<div class="ipsSpoiler" data-ipsspoiler="">
+	  <div class="ipsSpoiler_header ipsSpoiler_closed">  <a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#" data-action="toggleSpoiler">&nbsp;</a>  <span>Показать содержимое</span> </div>
+
+	<div class="ipsSpoiler_contents" style="display: none;">
+		<p>
+			<a href="./Перепрошивка bootloader_files/usbasp-driver-8.png.9c1458458912847f944f957a518af883.png" title="Увеличить изображение" data-ipslightbox="" data-ipslightbox-group="g73531"><img alt="usbasp-driver-8.png.9c1458458912847f944f" class="ipsImage ipsImage_thumbnailed" data-fileid="204" data-unique="8ubyxjglv" src="./Перепрошивка bootloader_files/usbasp-driver-8.png.9c1458458912847f944f957a518af883.png"></a></p>
+	</div>
+</div>
+
+<p>
+	&nbsp;
+</p>
+
+
+			
+		</div>
+
+		<div class="ipsItemControls">
+			
+				
+					
+
+	<div data-controller="core.front.core.reaction" class="ipsItemControls_right ipsClearfix ">	
+		<div class="ipsReact ipsPos_right">
+			
+				<div class="ipsReact_blurb " data-role="reactionBlurb">
+					
+						
+
+
+	<ul class="ipsReact_reactions">
+	
+		
+		<li class="ipsReact_reactCount">
+			
+				<span data-ipstooltip="" title="Like">
+			
+					<span>
+						<img src="./Перепрошивка bootloader_files/react_like.png" alt="Like">
+					</span>
+					<span>
+						1
+					</span>
+			
+				</span>
+			
+		</li>
+	
+	</ul>
+
+<div class="ipsReact_overview ipsType_blendLinks">
+	
+	
+</div>
+					
+				</div>
+			
+			
+			
+		</div>
+	</div>
+
+
+				
+			
+			<ul class="ipsComment_controls ipsClearfix ipsItemControls_left" data-role="commentControls">
+				
+					
+					
+					
+				
+				<li class="ipsHide" data-role="commentLoading">
+					<span class="ipsLoading ipsLoading_tiny ipsLoading_noAnim"></span>
+				</li>
+			</ul>
+</div>
+
+		
+			
+
+		
+	</div>
+
+	<div class="ipsMenu ipsMenu_wide ipsHide cPostShareMenu" id="elSharePost_45_menu">
+		<div class="ipsPad">
+			<h4 class="ipsType_sectionHead">Поделиться сообщением</h4>
+			<hr class="ipsHr">
+<h5 class="ipsType_normal ipsType_reset">Ссылка на сообщение</h5>
+			
+			<input type="text" value="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/?do=findComment&amp;comment=45" class="ipsField_fullWidth">
+			
+
+			
+				<h5 class="ipsType_normal ipsType_reset ipsSpacer_top">Поделиться на других сайтах</h5>
+				
+
+	<ul class="ipsList_inline ipsList_noSpacing ipsClearfix" data-controller="core.front.core.sharelink">
+		
+			<li>
+<a href="http://twitter.com/share?text=%D0%9F%D0%B5%D1%80%D0%B5%D0%BF%D1%80%D0%BE%D1%88%D0%B8%D0%B2%D0%BA%D0%B0%20bootloader%20%28%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D1%87%D0%B8%D0%BA%D0%B0%29&amp;url=https%3A%2F%2Fit4it.club%2Ftopic%2F19-pereproshivka-bootloader-zagruzchika%2F%3Fdo%3DfindComment%26comment%3D45" class="cShareLink cShareLink_twitter" target="_blank" data-role="shareLink" title="Поделиться в Twitter" data-ipstooltip="" rel="noopener noreferrer">
+	<i class="fa fa-twitter"></i>
+</a>
+<a href="http://vk.com/share.php?url=https%3A%2F%2Fit4it.club%2Ftopic%2F19-pereproshivka-bootloader-zagruzchika%2F%3Fdo%3DfindComment%26comment%3D45&amp;text=%D0%9F%D0%B5%D1%80%D0%B5%D0%BF%D1%80%D0%BE%D1%88%D0%B8%D0%B2%D0%BA%D0%B0%20bootloader%20%28%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D1%87%D0%B8%D0%BA%D0%B0%29&amp;noparse=false" class="cShareLink cShareLink_vk" target="_blank" data-role="shareLink" title="Опубликовать ВКонтакте" data-ipstooltip="">
+	<i class="fa fa-vk"></i>
+</a>
+<a href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&amp;st.s=1&amp;st._surl=https%3A%2F%2Fit4it.club%2Ftopic%2F19-pereproshivka-bootloader-zagruzchika%2F%3Fdo%3DfindComment%26comment%3D45&amp;st.comments=%D0%9F%D0%B5%D1%80%D0%B5%D0%BF%D1%80%D0%BE%D1%88%D0%B8%D0%B2%D0%BA%D0%B0%20bootloader%20%28%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D1%87%D0%B8%D0%BA%D0%B0%29" class="cShareLink cShareLink_odnoklassniki" target="_blank" data-role="shareLink" title="Рассказать одноклассникам" data-ipstooltip="">
+	<i class="fa fa-odnoklassniki"></i>
+</a></li>
+		
+			<li>
+<a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fit4it.club%2Ftopic%2F19-pereproshivka-bootloader-zagruzchika%2F%3Fdo%3DfindComment%26comment%3D45" class="cShareLink cShareLink_facebook" target="_blank" data-role="shareLink" title="Поделиться в Facebook" data-ipstooltip="" rel="noopener">
+	<i class="fa fa-facebook"></i>
+</a></li>
+		
+			<li>
+<a href="https://plus.google.com/share?url=https%3A%2F%2Fit4it.club%2Ftopic%2F19-pereproshivka-bootloader-zagruzchika%2F%3Fdo%3DfindComment%26comment%3D45" class="cShareLink cShareLink_google" target="_blank" data-role="shareLink" title="Поделиться в Google+" data-ipstooltip="" rel="noopener noreferrer">
+	<i class="fa fa-google-plus"></i>
+</a>
+<a href="https://telegram.me/share/url?url=https%3A%2F%2Fit4it.club%2Ftopic%2F19-pereproshivka-bootloader-zagruzchika%2F%3Fdo%3DfindComment%26comment%3D45&amp;text=" class="cShareLink cShareLink_telegram" target="_blank" data-role="shareLink" title="Поделиться с собеседниками в Телеграм" data-ipstooltip="">
+	<i class="fa fa-paper-plane"></i>
+</a>
+<a href="https://getpocket.com/edit?url=https%3A%2F%2Fit4it.club%2Ftopic%2F19-pereproshivka-bootloader-zagruzchika%2F%3Fdo%3DfindComment%26comment%3D45&amp;title=" class="cShareLink cShareLink_get_pocket" target="_blank" data-role="shareLink" title="Добавить ссылку в Pocket" data-ipstooltip="">
+	<i class="fa fa-get-pocket"></i>
+</a></li>
+		
+			<li>
+<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fit4it.club%2Ftopic%2F19-pereproshivka-bootloader-zagruzchika%2F%3Fdo%3DfindComment%26comment%3D45&amp;title=%D0%9F%D0%B5%D1%80%D0%B5%D0%BF%D1%80%D0%BE%D1%88%D0%B8%D0%B2%D0%BA%D0%B0+bootloader+%28%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D1%87%D0%B8%D0%BA%D0%B0%29" class="cShareLink cShareLink_linkedin" target="_blank" data-role="shareLink" title="Поделиться в LinkedIn" data-ipstooltip="" rel="noopener">
+	<i class="fa fa-linkedin"></i>
+</a></li>
+		
+			<li>
+<a href="http://pinterest.com/pin/create/button/?url=https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/?do=findComment%26comment=45&amp;media=" class="cShareLink cShareLink_pinterest" target="_blank" data-role="shareLink" title="Поделиться в Pinterest" data-ipstooltip="" rel="noopener">
+	<i class="fa fa-pinterest"></i>
+</a></li>
+		
+	</ul>
+
+			
+		</div>
+	</div>
+</div>
+
+	</div>
+</article>
+
+					
+				
+			
+			
+<input type="hidden" name="csrfKey" value="ccb9bd9ca6920cbbecc170f4987a4cf9">
+
+
+		</form>
+	</div>
+
+	
+	
+
+	
+		<a id="replyForm"></a>
+		<div data-role="replyArea" class="cTopicPostArea ipsAreaBackground ipsPad cTopicPostArea_noSize ipsSpacer_top">
+			
+				
+					
+<div class="ipsComposeArea ipsComposeArea_withPhoto ipsComposeArea_unavailable ipsClearfix">
+	<div class="ipsPos_left ipsResponsive_hidePhone ipsResponsive_block">
+
+	<span class="ipsUserPhoto ipsUserPhoto_small ">
+		<img src="./Перепрошивка bootloader_files/84c1e40ea0e759e3f1505eb1788ddf3c_default_photo.png" alt="Гость">
+	</span>
+</div>
+	<div class="ipsComposeArea_editor">
+		<div class="ipsComposeArea_dummy">
+			<span class="ipsType_warning"><i class="fa fa-warning"></i> Эта тема закрыта для публикации сообщений. </span>
+		
+			
+		</div>
+	</div>
+</div>
+				
+			
+		</div>
+	
+
+	
+		<div class="ipsResponsive_noFloat ipsResponsive_showPhone ipsResponsive_block ipsSpacer_top">
+			
+
+<div data-followapp="forums" data-followarea="topic" data-followid="19" data-controller="core.front.core.followButton">
+	
+		<span class="ipsType_light ipsType_blendLinks ipsResponsive_hidePhone ipsResponsive_inline"><i class="fa fa-info-circle"></i> <a href="https://it4it.club/login/" title="Перейти на страницу входа">Войдите, чтобы подписаться</a>&nbsp;&nbsp;</span>
+	
+	
+
+	<div class="ipsFollow ipsPos_middle ipsButton ipsButton_link ipsButton_verySmall ipsButton_disabled" data-role="followButton">
+		
+			<span>Подписчики</span>
+			<span class="ipsCommentCount">0</span>
+		
+	</div>
+
+</div>
+		</div>
+		<div class="ipsResponsive_noFloat ipsResponsive_showPhone ipsResponsive_block ipsSpacer_top">
+			
+
+
+
+
+
+
+		</div>
+	
+</div>
+
+
+
+<div class="ipsGrid ipsGrid_collapsePhone ipsPager ipsClearfix ipsSpacer_top ipsContained">
+	<div class="ipsGrid_span6 ipsType_left ipsPager_prev ">
+		
+			<a href="https://it4it.club/forum/16-arduino/" title="Перейти на Arduino" rel="up">
+				<span class="ipsPager_type">Перейти к списку тем</span>
+				<span class="ipsPager_title ipsType_light ipsTruncate ipsTruncate_line">Arduino</span>
+			</a>
+		
+	</div>
+	
+</div>
+
+
+	<hr class="ipsHr">
+	
+
+	<ul class="ipsList_inline ipsList_noSpacing ipsClearfix" data-controller="core.front.core.sharelink">
+		
+			<li>
+<a href="http://twitter.com/share?text=%D0%9F%D0%B5%D1%80%D0%B5%D0%BF%D1%80%D0%BE%D1%88%D0%B8%D0%B2%D0%BA%D0%B0%20bootloader%20%28%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D1%87%D0%B8%D0%BA%D0%B0%29&amp;url=https%3A%2F%2Fit4it.club%2Ftopic%2F19-pereproshivka-bootloader-zagruzchika%2F" class="cShareLink cShareLink_twitter" target="_blank" data-role="shareLink" title="Поделиться в Twitter" data-ipstooltip="" rel="noopener noreferrer">
+	<i class="fa fa-twitter"></i>
+</a>
+<a href="http://vk.com/share.php?url=https%3A%2F%2Fit4it.club%2Ftopic%2F19-pereproshivka-bootloader-zagruzchika%2F&amp;text=%D0%9F%D0%B5%D1%80%D0%B5%D0%BF%D1%80%D0%BE%D1%88%D0%B8%D0%B2%D0%BA%D0%B0%20bootloader%20%28%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D1%87%D0%B8%D0%BA%D0%B0%29&amp;noparse=false" class="cShareLink cShareLink_vk" target="_blank" data-role="shareLink" title="Опубликовать ВКонтакте" data-ipstooltip="">
+	<i class="fa fa-vk"></i>
+</a>
+<a href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&amp;st.s=1&amp;st._surl=https%3A%2F%2Fit4it.club%2Ftopic%2F19-pereproshivka-bootloader-zagruzchika%2F&amp;st.comments=%D0%9F%D0%B5%D1%80%D0%B5%D0%BF%D1%80%D0%BE%D1%88%D0%B8%D0%B2%D0%BA%D0%B0%20bootloader%20%28%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D1%87%D0%B8%D0%BA%D0%B0%29" class="cShareLink cShareLink_odnoklassniki" target="_blank" data-role="shareLink" title="Рассказать одноклассникам" data-ipstooltip="">
+	<i class="fa fa-odnoklassniki"></i>
+</a></li>
+		
+			<li>
+<a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fit4it.club%2Ftopic%2F19-pereproshivka-bootloader-zagruzchika%2F" class="cShareLink cShareLink_facebook" target="_blank" data-role="shareLink" title="Поделиться в Facebook" data-ipstooltip="" rel="noopener">
+	<i class="fa fa-facebook"></i>
+</a></li>
+		
+			<li>
+<a href="https://plus.google.com/share?url=https%3A%2F%2Fit4it.club%2Ftopic%2F19-pereproshivka-bootloader-zagruzchika%2F" class="cShareLink cShareLink_google" target="_blank" data-role="shareLink" title="Поделиться в Google+" data-ipstooltip="" rel="noopener noreferrer">
+	<i class="fa fa-google-plus"></i>
+</a>
+<a href="https://telegram.me/share/url?url=https%3A%2F%2Fit4it.club%2Ftopic%2F19-pereproshivka-bootloader-zagruzchika%2F&amp;text=" class="cShareLink cShareLink_telegram" target="_blank" data-role="shareLink" title="Поделиться с собеседниками в Телеграм" data-ipstooltip="">
+	<i class="fa fa-paper-plane"></i>
+</a>
+<a href="https://getpocket.com/edit?url=https%3A%2F%2Fit4it.club%2Ftopic%2F19-pereproshivka-bootloader-zagruzchika%2F&amp;title=" class="cShareLink cShareLink_get_pocket" target="_blank" data-role="shareLink" title="Добавить ссылку в Pocket" data-ipstooltip="">
+	<i class="fa fa-get-pocket"></i>
+</a></li>
+		
+			<li>
+<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fit4it.club%2Ftopic%2F19-pereproshivka-bootloader-zagruzchika%2F&amp;title=%D0%9F%D0%B5%D1%80%D0%B5%D0%BF%D1%80%D0%BE%D1%88%D0%B8%D0%B2%D0%BA%D0%B0+bootloader+%28%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D1%87%D0%B8%D0%BA%D0%B0%29" class="cShareLink cShareLink_linkedin" target="_blank" data-role="shareLink" title="Поделиться в LinkedIn" data-ipstooltip="" rel="noopener">
+	<i class="fa fa-linkedin"></i>
+</a></li>
+		
+			<li>
+<a href="http://pinterest.com/pin/create/button/?url=https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/&amp;media=" class="cShareLink cShareLink_pinterest" target="_blank" data-role="shareLink" title="Поделиться в Pinterest" data-ipstooltip="" rel="noopener">
+	<i class="fa fa-pinterest"></i>
+</a></li>
+		
+	</ul>
+
+
+
+
+						
+
+	<div class="cWidgetContainer " data-role="widgetReceiver" data-orientation="horizontal" data-widgetarea="footer">
+		<ul class="ipsList_reset">
+			
+				
+					
+					<li class="ipsWidget ipsWidget_horizontal ipsBox" data-blockid="app_core_relatedContent_ivp3252cg" data-blockconfig="true" data-blocktitle="Похожие публикации" data-blockerrormessage="Этот блок не будет отображён до тех пор, пока не будут установлены его настройки." data-controller="core.front.widgets.block">
+<h3 class="ipsType_reset ipsWidget_title">Похожие публикации</h3>
+<div class="ipsPad_half ipsWidget_inner">
+	<ul class="ipsDataList ipsDataList_reducedSpacing">
+	
+		<li class="ipsDataItem">
+			<div class="ipsDataItem_icon">
+				
+
+
+	<a href="https://it4it.club/profile/3-kitsum/" data-ipshover="" data-ipshover-target="https://it4it.club/profile/3-kitsum/?do=hovercard" class="ipsUserPhoto ipsUserPhoto_tiny" title="Перейти в профиль Kitsum">
+		<img src="./Перепрошивка bootloader_files/-KPsq33Xx_Q.jpg" alt="Kitsum">
+	</a>
+
+			</div>
+			<div class="ipsDataItem_main">
+				<div class="ipsType_break ipsContained"><a href="https://it4it.club/topic/55-meteostanciya-na-esp8266-ot-it4itclub/" title="Подробная информация о &quot;Метеостанция на ESP8266 от it4it.club&quot;" class="ipsTruncate ipsTruncate_line">Метеостанция на ESP8266 от it4it.club</a></div>
+				<span class="ipsType_light ipsType_medium">Автор: 
+<a href="https://it4it.club/profile/3-kitsum/" data-ipshover="" data-ipshover-target="https://it4it.club/profile/3-kitsum/?do=hovercard&amp;referrer=https%253A%252F%252Fit4it.club%252Ftopic%252F19-pereproshivka-bootloader-zagruzchika%252F" title="Перейти в профиль Kitsum" class="ipsType_break">Kitsum</a></span><br>
+				
+					<div class="ipsType_richText ipsType_normal is-truncated" data-ipstruncate="" data-ipstruncate-type="remove" data-ipstruncate-size="2 lines" style="word-wrap: break-word;">
+						
+	Всем привет, в этой статье поговорим об уже надоевшей всем теме - "Метеостанция". Каждый пытается сделать что-то свое, вот и я&nbsp;не стал&nbsp;исключением и попытался&nbsp;материализовать свои эротические фантазии на контроллере ESP8266. Тема задумывалась уже давно как некое обновление для предыдущего проекта этой тематики, но из-за своей неспешности... </div>
+				
+			</div>
+		</li>
+	
+		<li class="ipsDataItem">
+			<div class="ipsDataItem_icon">
+				
+
+
+	<a href="https://it4it.club/profile/3-kitsum/" data-ipshover="" data-ipshover-target="https://it4it.club/profile/3-kitsum/?do=hovercard" class="ipsUserPhoto ipsUserPhoto_tiny" title="Перейти в профиль Kitsum">
+		<img src="./Перепрошивка bootloader_files/-KPsq33Xx_Q.jpg" alt="Kitsum">
+	</a>
+
+			</div>
+			<div class="ipsDataItem_main">
+				<div class="ipsType_break ipsContained"><a href="https://it4it.club/topic/60-zamok-s-radiochastotnoy-identifikaciey-na-baze-nfc-kontrollera-pn532/" title="Подробная информация о &quot;Замок с радиочастотной идентификацией на базе NFC контроллера PN532&quot;" class="ipsTruncate ipsTruncate_line">Замок с радиочастотной идентификацией на базе NFC контроллера PN532</a></div>
+				<span class="ipsType_light ipsType_medium">Автор: 
+<a href="https://it4it.club/profile/3-kitsum/" data-ipshover="" data-ipshover-target="https://it4it.club/profile/3-kitsum/?do=hovercard&amp;referrer=https%253A%252F%252Fit4it.club%252Ftopic%252F19-pereproshivka-bootloader-zagruzchika%252F" title="Перейти в профиль Kitsum" class="ipsType_break">Kitsum</a></span><br>
+				
+					<div class="ipsType_richText ipsType_normal is-truncated" data-ipstruncate="" data-ipstruncate-type="remove" data-ipstruncate-size="2 lines" style="word-wrap: break-word;">
+						
+	Доброе время суток.
+  <br style="display: inline;">  
+
+
+	Сегодня мы будем собирать бесконтактный замок с использованием NFC контроллера PN532. Опираясь на опыт прошлого варианта (на контроллере MFRC522) и на отзывы тех, кто... </div>
+				
+			</div>
+		</li>
+	
+		<li class="ipsDataItem">
+			<div class="ipsDataItem_icon">
+				
+
+
+	<a href="https://it4it.club/profile/3-kitsum/" data-ipshover="" data-ipshover-target="https://it4it.club/profile/3-kitsum/?do=hovercard" class="ipsUserPhoto ipsUserPhoto_tiny" title="Перейти в профиль Kitsum">
+		<img src="./Перепрошивка bootloader_files/-KPsq33Xx_Q.jpg" alt="Kitsum">
+	</a>
+
+			</div>
+			<div class="ipsDataItem_main">
+				<div class="ipsType_break ipsContained"><a href="https://it4it.club/topic/17-domashnyaya-meteostanciya-na-arduino-i-otpravka-dannyh-na-narodnyy-monitoring/" title="Подробная информация о &quot;Домашняя метеостанция на Arduino и отправка данных на &quot;Народный мониторинг&quot;&quot;" class="ipsTruncate ipsTruncate_line">Домашняя метеостанция на Arduino и отправка данных на "Народный мониторинг"</a></div>
+				<span class="ipsType_light ipsType_medium">Автор: 
+<a href="https://it4it.club/profile/3-kitsum/" data-ipshover="" data-ipshover-target="https://it4it.club/profile/3-kitsum/?do=hovercard&amp;referrer=https%253A%252F%252Fit4it.club%252Ftopic%252F19-pereproshivka-bootloader-zagruzchika%252F" title="Перейти в профиль Kitsum" class="ipsType_break">Kitsum</a></span><br>
+				
+					<div class="ipsType_richText ipsType_normal is-truncated" data-ipstruncate="" data-ipstruncate-type="remove" data-ipstruncate-size="2 lines" style="word-wrap: break-word;">
+						
+	Это первая часть и соответственно первая версия метеостанции. Постепенно будем её улучшать обвешивая всяческими лампочками, свистульками и т.п. Текущий вариант протестирован и стабильно работает с июля 2015.
+  <br style="display: inline;">... </div>
+				
+			</div>
+		</li>
+	
+		<li class="ipsDataItem">
+			<div class="ipsDataItem_icon">
+				
+
+
+	<a href="https://it4it.club/profile/3-kitsum/" data-ipshover="" data-ipshover-target="https://it4it.club/profile/3-kitsum/?do=hovercard" class="ipsUserPhoto ipsUserPhoto_tiny" title="Перейти в профиль Kitsum">
+		<img src="./Перепрошивка bootloader_files/-KPsq33Xx_Q.jpg" alt="Kitsum">
+	</a>
+
+			</div>
+			<div class="ipsDataItem_main">
+				<div class="ipsType_break ipsContained"><a href="https://it4it.club/topic/40-esp8266-i-parsing-pogodyi-s-openweathermap/" title="Подробная информация о &quot;esp8266 и парсинг погоды с OpenWeatherMap&quot;" class="ipsTruncate ipsTruncate_line">esp8266 и парсинг погоды с OpenWeatherMap</a></div>
+				<span class="ipsType_light ipsType_medium">Автор: 
+<a href="https://it4it.club/profile/3-kitsum/" data-ipshover="" data-ipshover-target="https://it4it.club/profile/3-kitsum/?do=hovercard&amp;referrer=https%253A%252F%252Fit4it.club%252Ftopic%252F19-pereproshivka-bootloader-zagruzchika%252F" title="Перейти в профиль Kitsum" class="ipsType_break">Kitsum</a></span><br>
+				
+					<div class="ipsType_richText ipsType_normal is-truncated" data-ipstruncate="" data-ipstruncate-type="remove" data-ipstruncate-size="2 lines" style="word-wrap: break-word;">
+						
+	Всем доброго времени суток, сегодня поговорим о esp8266 и парсинге погоды с интернета. Это довольно интересная&nbsp;альтернатива метеостанции описанной в параллельной теме и думаю, что первый пост стоит посвятить&nbsp;базовой программе - своего рода фундаменту, на базе которого можно производить дальнейшие&nbsp;модификации от подключения дисплея до... </div>
+				
+			</div>
+		</li>
+	
+		<li class="ipsDataItem">
+			<div class="ipsDataItem_icon">
+				
+
+
+	<a href="https://it4it.club/profile/26-sergon63tlt/" data-ipshover="" data-ipshover-target="https://it4it.club/profile/26-sergon63tlt/?do=hovercard" class="ipsUserPhoto ipsUserPhoto_tiny" title="Перейти в профиль sergon63tlt">
+		<img src="./Перепрошивка bootloader_files/S.png.242671b86e6581bfbcf185f54c723417.png" alt="sergon63tlt">
+	</a>
+
+			</div>
+			<div class="ipsDataItem_main">
+				<div class="ipsType_break ipsContained"><a href="https://it4it.club/topic/38-arduino-v-avtomobile/" title="Подробная информация о &quot;Arduino в автомобиле&quot;" class="ipsTruncate ipsTruncate_line">Arduino в автомобиле</a></div>
+				<span class="ipsType_light ipsType_medium">Автор: 
+<a href="https://it4it.club/profile/26-sergon63tlt/" data-ipshover="" data-ipshover-target="https://it4it.club/profile/26-sergon63tlt/?do=hovercard&amp;referrer=https%253A%252F%252Fit4it.club%252Ftopic%252F19-pereproshivka-bootloader-zagruzchika%252F" title="Перейти в профиль sergon63tlt" class="ipsType_break">sergon63tlt</a></span><br>
+				
+					<div class="ipsType_richText ipsType_normal" data-ipstruncate="" data-ipstruncate-type="remove" data-ipstruncate-size="2 lines" style="word-wrap: break-word;">
+							Предлогаю в данной теме обсуждать возможность применения Arduino в автомобиле для его улучшения.
+  <br>  
+					</div>
+				
+			</div>
+		</li>
+	
+		<li class="ipsDataItem">
+			<div class="ipsDataItem_icon">
+				
+
+
+	<a href="https://it4it.club/profile/3-kitsum/" data-ipshover="" data-ipshover-target="https://it4it.club/profile/3-kitsum/?do=hovercard" class="ipsUserPhoto ipsUserPhoto_tiny" title="Перейти в профиль Kitsum">
+		<img src="./Перепрошивка bootloader_files/-KPsq33Xx_Q.jpg" alt="Kitsum">
+	</a>
+
+			</div>
+			<div class="ipsDataItem_main">
+				<div class="ipsType_break ipsContained"><a href="https://it4it.club/topic/22-%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B8%D1%80%D1%83%D0%B5%D0%BC-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%83-%D1%81-%D0%B6%D0%B0%D0%BB%D1%8E%D0%B7%D0%B8/" title="Подробная информация о &quot;Автоматизируем работу с Жалюзи&quot;" class="ipsTruncate ipsTruncate_line">Автоматизируем работу с Жалюзи</a></div>
+				<span class="ipsType_light ipsType_medium">Автор: 
+<a href="https://it4it.club/profile/3-kitsum/" data-ipshover="" data-ipshover-target="https://it4it.club/profile/3-kitsum/?do=hovercard&amp;referrer=https%253A%252F%252Fit4it.club%252Ftopic%252F19-pereproshivka-bootloader-zagruzchika%252F" title="Перейти в профиль Kitsum" class="ipsType_break">Kitsum</a></span><br>
+				
+					<div class="ipsType_richText ipsType_normal is-truncated" data-ipstruncate="" data-ipstruncate-type="remove" data-ipstruncate-size="2 lines" style="word-wrap: break-word;">
+						
+	Доброе время суток.
+  <br style="display: inline;">  
+
+
+	Хочу поделиться опытом автоматизации изобретения Джона Уэбстера - Жалюзи, что в переводе с Французского звучит как Ревность! Скажу честно, что мой опыт обуздать это не... </div>
+				
+			</div>
+		</li>
+	
+	</ul>
+</div></li>
+				
+					
+					<li class="ipsWidget ipsWidget_horizontal ipsBox" data-blockid="app_core_activeUsers_o0x63a0fa" data-blocktitle="Сейчас на странице" data-blockerrormessage="Этот блок не будет отображён т.к. он недоступен на этой странице." data-controller="core.front.widgets.block">
+
+<h3 class="ipsType_reset ipsWidget_title">
+	
+		Сейчас на странице
+	
+	
+		&nbsp;&nbsp;<span class="ipsType_light ipsType_unbold ipsType_medium">0 пользователей</span>
+	
+</h3>
+<div class="ipsWidget_inner ipsPad">
+	
+		<p class="ipsType_reset ipsType_medium ipsType_light">Нет пользователей, просматривающих эту страницу.</p>
+	
+</div></li>
+				
+			
+		</ul>
+	</div>
+
+					</div>
+					
+
+					
+<nav class="ipsBreadcrumb ipsBreadcrumb_bottom ipsFaded_withHover">
+	
+		
+
+
+	
+
+	<ul class="ipsList_inline ipsPos_right">
+		
+		<li>
+			<a data-action="defaultStream" class="ipsType_light " href="https://it4it.club/discover/"><i class="icon-newspaper"></i> <span>Вся активность</span></a>
+		</li>
+		
+	</ul>
+
+	<ul data-role="breadcrumbList">
+		<li>
+			<a title="Главная" href="https://it4it.club/">
+				<span><i class="fa fa-home"></i> Главная <i class="fa fa-angle-right"></i></span>
+			</a>
+		</li>
+		
+		
+			<li>
+				
+					<a href="https://it4it.club/forum/15-%D0%BC%D0%B8%D0%BA%D1%80%D0%BE%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D0%BB%D0%B5%D1%80%D1%8B/">
+						<span>Микроконтроллеры <i class="fa fa-angle-right"></i></span>
+					</a>
+				
+			</li>
+		
+			<li>
+				
+					<a href="https://it4it.club/forum/16-arduino/">
+						<span>Arduino <i class="fa fa-angle-right"></i></span>
+					</a>
+				
+			</li>
+		
+			<li>
+				
+					Перепрошивка bootloader (загрузчика)
+				
+			</li>
+		
+	</ul>
+</nav>
+				</div>
+			</div>
+			
+		</main><!-- start google translate --><div id="google_translate_element" style="text-align: center"><div class="skiptranslate goog-te-gadget" dir="ltr" style=""><div id=":0.targetLanguage" class="goog-te-gadget-simple" style="white-space: nowrap;"><img src="./Перепрошивка bootloader_files/cleardot.gif" class="goog-te-gadget-icon" alt="" style="background-image: url(&quot;https://translate.googleapis.com/translate_static/img/te_ctrl3.gif&quot;); background-position: -65px 0px;"><span style="vertical-align: middle;"><a aria-haspopup="true" class="goog-te-menu-value" href="javascript:void(0)"><span>Выбрать язык</span><img src="./Перепрошивка bootloader_files/cleardot.gif" alt="" width="1" height="1"><span style="border-left: 1px solid rgb(187, 187, 187);">​</span><img src="./Перепрошивка bootloader_files/cleardot.gif" alt="" width="1" height="1"><span aria-hidden="true" style="color: rgb(118, 118, 118);">▼</span></a></span></div></div></div><script type="text/javascript">
+		function googleTranslateElementInit() {
+  			new google.translate.TranslateElement({pageLanguage: 'ru', layout: google.translate.TranslateElement.FloatPosition.TOP_RIGHT, gaTrack: true, gaId: 'UA-35994851-2'}, 'google_translate_element');
+		}
+		</script><script type="text/javascript" src="./Перепрошивка bootloader_files/element.js.Без названия"></script>
+		<!-- end google translate -->
+		<footer id="ipsLayout_footer" class="ipsClearfix"><div class="ipsLayout_container">
+				
+				
+
+<ul id="elFooterSocialLinks" class="ipsList_inline ipsType_center ipsSpacer_top">
+	
+
+	
+		<li class="cUserNav_icon">
+			<a href="https://vk.com/it4it.club" target="blank" class="cShareLink cShareLink_vk"><i class="fa fa-vk"></i></a>
+		</li>
+	
+		<li class="cUserNav_icon">
+			<a href="https://plus.google.com/112383373681400109404" target="blank" class="cShareLink cShareLink_google-plus"><i class="fa fa-google-plus"></i></a>
+		</li>
+	
+
+</ul>
+
+
+<ul class="ipsList_inline ipsType_center ipsSpacer_top" id="elFooterLinks">
+	
+	
+		<li>
+			<a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#elNavLang_menu" id="elNavLang" data-ipsmenu="" data-ipsmenu-above="">Язык <i class="fa fa-caret-down"></i></a>
+			<ul id="elNavLang_menu" class="ipsMenu ipsMenu_selectable ipsHide">
+			
+				<li class="ipsMenu_item ipsMenu_itemChecked">
+					<form action="https://it4it.club/language/?csrfKey=ccb9bd9ca6920cbbecc170f4987a4cf9" method="post">
+					<button type="submit" name="id" value="4" class="ipsButton ipsButton_link ipsButton_link_secondary"><i class="ipsFlag ipsFlag-ru"></i> Русский (RU) (По умолчанию)</button>
+					</form>
+				</li>
+			
+				<li class="ipsMenu_item">
+					<form action="https://it4it.club/language/?csrfKey=ccb9bd9ca6920cbbecc170f4987a4cf9" method="post">
+					<button type="submit" name="id" value="1" class="ipsButton ipsButton_link ipsButton_link_secondary"><i class="ipsFlag ipsFlag-us"></i> English (USA) </button>
+					</form>
+				</li>
+			
+			</ul>
+		</li>
+	
+	
+	
+	
+	
+		<li><a rel="nofollow" href="https://it4it.club/contact/" data-ipsdialog="" data-ipsdialog-remotesubmit="" data-ipsdialog-flashmessage="Спасибо, ваше сообщение было отправлено администрации." data-ipsdialog-title="Обратная связь">Обратная связь</a></li>
+	
+</ul>	
+
+
+<p id="elCopyright">
+	<span id="elCopyright_userLine">iT4iT CLUB</span>
+	<a rel="nofollow" title="Invision Community" href="https://www.invisioncommunity.com/">Powered by Invision Community</a>
+</p>
+			</div>
+		</footer>
+		
+<div id="elMobileDrawer" class="ipsDrawer ipsHide">
+	<a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#" class="ipsDrawer_close" data-action="close"><span>×</span></a>
+	<div class="ipsDrawer_menu">
+		<div class="ipsDrawer_content">
+			
+
+			<div class="ipsSpacer_bottom ipsPad">
+				<ul class="ipsToolList ipsToolList_vertical">
+					
+						<li>
+							<a href="https://it4it.club/login/" class="ipsButton ipsButton_light ipsButton_small ipsButton_fullWidth">Уже зарегистрированы? Войти</a>
+						</li>
+						
+							<li>
+								<a href="https://it4it.club/register/" id="elRegisterButton_mobile" class="ipsButton ipsButton_small ipsButton_fullWidth ipsButton_important">Регистрация</a>
+							</li>
+						
+					
+
+					
+				</ul>
+			</div>
+
+			<ul class="ipsDrawer_list">
+				
+
+				
+				
+				
+				
+					
+						
+						
+							<li class="ipsDrawer_itemParent">
+								<h4 class="ipsDrawer_title"><a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#">Сообщество</a></h4>
+								<ul class="ipsDrawer_list">
+									<li data-action="back"><a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#">Назад</a></li>
+									
+										<li><a href="https://it4it.club/">Сообщество</a></li>
+									
+									
+									
+										
+
+
+	
+		
+			<li>
+				<a href="https://it4it.club/">
+					Форум
+				</a>
+			</li>
+		
+	
+
+	
+		
+			<li>
+				<a href="https://it4it.club/blogs/">
+					Блоги
+				</a>
+			</li>
+		
+	
+
+	
+		
+			<li>
+				<a href="https://it4it.club/calendar/">
+					Календарь
+				</a>
+			</li>
+		
+	
+
+	
+
+	
+		
+			<li>
+				<a href="https://it4it.club/staff/">
+					Администрация
+				</a>
+			</li>
+		
+	
+
+	
+		
+			<li>
+				<a href="https://it4it.club/online/">
+					Пользователи в сети
+				</a>
+			</li>
+		
+	
+
+	
+		
+			<li>
+				<a href="https://it4it.club/contact/" target="_blank">
+					Cвязаться с нами
+				</a>
+			</li>
+		
+	
+
+	
+		
+			<li>
+				<a href="https://plus.google.com/112383373681400109404/posts" target="_blank">
+					Google+
+				</a>
+			</li>
+		
+	
+
+	
+		
+			<li>
+				<a href="http://vk.com/it4it.club" target="_blank">
+					ВКонтакте
+				</a>
+			</li>
+		
+	
+
+										
+								</ul>
+							</li>
+						
+					
+				
+					
+						
+						
+							<li class="ipsDrawer_itemParent">
+								<h4 class="ipsDrawer_title"><a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#">Активность</a></h4>
+								<ul class="ipsDrawer_list">
+									<li data-action="back"><a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/#">Назад</a></li>
+									
+										<li><a href="https://it4it.club/discover/">Активность</a></li>
+									
+									
+									
+										
+
+
+	
+		
+			<li>
+				<a href="https://it4it.club/discover/">
+					Вся активность
+				</a>
+			</li>
+		
+	
+
+	
+		
+			<li>
+				<a href="https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/">
+					Мои потоки
+				</a>
+			</li>
+		
+	
+
+	
+		
+			<li>
+				<a href="https://it4it.club/discover/unread/">
+					Непрочитанное
+				</a>
+			</li>
+		
+	
+
+	
+		
+			<li>
+				<a href="https://it4it.club/discover/content-started/">
+					Мои публикации
+				</a>
+			</li>
+		
+	
+
+	
+		
+			<li>
+				<a href="https://it4it.club/search/">
+					Поиск
+				</a>
+			</li>
+		
+	
+
+										
+								</ul>
+							</li>
+						
+					
+				
+					
+						
+						
+							<li><a href="https://it4it.club/leaderboard/">Таблица лидеров</a></li>
+						
+					
+				
+					
+				
+					
+						
+						
+							<li><a href="https://it4it.club/clubs/">Клубы</a></li>
+						
+					
+				
+			</ul>
+		</div>
+	</div>
+</div>
+		
+
+	<script type="text/javascript">
+		var ipsDebug = false;		
+	
+		var CKEDITOR_BASEPATH = '//it4it.club/applications/core/interface/ckeditor/ckeditor/';
+	
+		var ipsSettings = {
+			
+			
+			cookie_path: "/",
+			
+			cookie_prefix: "ips4_",
+			
+			
+			cookie_ssl: true,
+			
+			upload_imgURL: "",
+			message_imgURL: "",
+			notification_imgURL: "",
+			baseURL: "//it4it.club/",
+			jsURL: "//it4it.club/applications/core/interface/js/js.php",
+			csrfKey: "ccb9bd9ca6920cbbecc170f4987a4cf9",
+			antiCache: "3cb1151b2e",
+			disableNotificationSounds: false,
+			useCompiledFiles: true,
+			links_external: true,
+			memberID: 0,
+			analyticsProvider: "ga",
+			viewProfiles: true,
+			
+		};
+	</script>
+
+
+
+<script type="text/javascript" src="./Перепрошивка bootloader_files/root_library.js.e1ed50b353c5859d7e6f1a23bb7945c6.js.Без названия" data-ips=""></script>
+
+
+<script type="text/javascript" src="./Перепрошивка bootloader_files/root_js_lang_4.js.6ae603cebe1bbe963bc0fbd96f8432cd.js.Без названия" data-ips=""></script>
+
+
+<script type="text/javascript" src="./Перепрошивка bootloader_files/root_framework.js.65d8ed4b488d2bf3fd48d12582867c18.js.Без названия" data-ips=""></script>
+
+
+<script type="text/javascript" src="./Перепрошивка bootloader_files/global_global_core.js.986bcb20154c71a5f73d068b66ab8fa0.js.Без названия" data-ips=""></script>
+
+
+<script type="text/javascript" src="./Перепрошивка bootloader_files/plugins_plugins.js.7e27df58bee567134be78c0e879fb5f8.js.Без названия" data-ips=""></script>
+
+
+<script type="text/javascript" src="./Перепрошивка bootloader_files/root_front.js.922122151def4b796bdbb2e25e525ec0.js.Без названия" data-ips=""></script>
+
+
+<script type="text/javascript" src="./Перепрошивка bootloader_files/front_front_topic.js.a2af1de644e27c8ba8f17deef5095851.js.Без названия" data-ips=""></script>
+
+
+<script type="text/javascript" src="./Перепрошивка bootloader_files/front_front_core.js.4006f98a036545ba322605cd0c59e776.js.Без названия" data-ips=""></script>
+
+
+<script type="text/javascript" src="./Перепрошивка bootloader_files/root_map.js.1d9053267ee4061044786c86ff9ab7fe.js.Без названия" data-ips=""></script>
+
+
+
+	<script type="text/javascript">
+		
+			ips.setSetting( 'date_format', jQuery.parseJSON('"dd.mm.yy"') );
+		
+			ips.setSetting( 'date_first_day', jQuery.parseJSON('0') );
+		
+			ips.setSetting( 'remote_image_proxy', jQuery.parseJSON('1') );
+		
+			ips.setSetting( 'ipb_url_filter_option', jQuery.parseJSON('"none"') );
+		
+			ips.setSetting( 'url_filter_any_action', jQuery.parseJSON('"allow"') );
+		
+			ips.setSetting( 'bypass_profanity', jQuery.parseJSON('0') );
+		
+		
+	</script>
+
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "DiscussionForumPosting",
+    "url": "https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/",
+    "discussionUrl": "https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/",
+    "name": "\u041f\u0435\u0440\u0435\u043f\u0440\u043e\u0448\u0438\u0432\u043a\u0430 bootloader (\u0437\u0430\u0433\u0440\u0443\u0437\u0447\u0438\u043a\u0430)",
+    "headline": "\u041f\u0435\u0440\u0435\u043f\u0440\u043e\u0448\u0438\u0432\u043a\u0430 bootloader (\u0437\u0430\u0433\u0440\u0443\u0437\u0447\u0438\u043a\u0430)",
+    "text": "\n\tUpdate 02.12.2015\n\n\n\n\n\t\t\u0421\u0442\u0430\u0442\u044c\u044f \u043f\u0435\u0440\u0435\u0440\u0430\u0431\u043e\u0442\u0430\u043d\u0430 \u0438 \u043f\u0435\u0440\u0435\u043f\u0440\u043e\u0432\u0435\u0440\u0435\u043d\u0430\n\t \n\t\n\t\t\u0410\u043a\u0442\u0443\u0430\u043b\u044c\u043d\u043e \u0434\u043b\u044f Optiboot 6.2 \u0438\u00a0Arduino IDE 1.6.6\u00a0\u0438\u043b\u0438 \u0432\u044b\u0448\u0435.\n\t \n\n\n\t\u0420\u0430\u043d\u043e \u0438\u043b\u0438 \u043f\u043e\u0437\u0434\u043d\u043e \u043f\u0440\u0438\u0445\u043e\u0434\u0438\u0442\u0441\u044f \u0441\u0442\u043e\u043b\u043a\u043d\u0443\u0442\u044c\u0441\u044f \u0441 \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u043e\u0441\u0442\u044c\u044e \u0437\u0430\u043c\u0435\u043d\u044b\u00a0bootloader (\u0437\u0430\u0433\u0440\u0443\u0437\u0447\u0438\u043a\u0430) \u043c\u0438\u043a\u0440\u043e\u043a\u043e\u043d\u0442\u0440\u043e\u043b\u043b\u0435\u0440\u0430. \u0412 \u043c\u043e\u0451\u043c \u0441\u043b\u0443\u0447\u0430\u0435 \u043e\u0441\u0442\u0440\u043e \u043f\u043e\u0442\u0440\u0435\u0431\u043e\u0432\u0430\u043b\u0441\u044f \u0444\u0443\u043d\u043a\u0446\u0438\u043e\u043d\u0430\u043b \u0437\u0430\u0433\u0440\u0443\u0437\u0447\u0438\u043a\u0430\u00a0Optiboot, \u0438\u0437-\u0437\u0430 \u0440\u0435\u0430\u043b\u0438\u0437\u043e\u0432\u0430\u043d\u043d\u043e\u0433\u043e \u0432 \u043d\u0435\u043c \u0441\u0442\u043e\u0440\u043e\u0436\u0435\u0432\u043e\u0433\u043e \u0442\u0430\u0439\u043c\u0435\u0440\u0430 (watchdog). \u041f\u043b\u044e\u0441 \u043a\u043e \u0432\u0441\u0435\u043c\u0443, \u043e\u043d \u0432\u0435\u0441\u0438\u0442 \u0432 \u0447\u0435\u0442\u044b\u0440\u0435 \u0440\u0430\u0437\u0430 \u043c\u0435\u043d\u044c\u0448\u0435 \u0441\u0442\u0430\u043d\u0434\u0430\u0440\u0442\u043d\u043e\u0433\u043e \u0438 \u043e\u0441\u0432\u043e\u0431\u043e\u0436\u0434\u0430\u0435\u0442 \u0434\u043e\u043f\u043e\u043b\u043d\u0438\u0442\u0435\u043b\u044c\u043d\u043e 1.5kb \u043f\u0430\u043c\u044f\u0442\u0438 \u0434\u043b\u044f\u00a0\u0441\u043a\u0435\u0442\u0447\u0430!\n\n\n\n\t\u0421\u0440\u0430\u0437\u0443 \u0445\u043e\u0447\u0443 \u043e\u0442\u043c\u0435\u0442\u0438\u0442\u044c, \u0447\u0442\u043e Optiboot \u0437\u0430\u043b\u0438\u0442\u00a0\u043f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e \u043d\u0430 Arduino UNO \u0438\u00a0Mega 2560.\n\n\n\n\t\u0423 \u043c\u0435\u043d\u044f \u0432 \u043d\u0430\u043b\u0438\u0447\u0438\u0438 \u0438\u043c\u0435\u043b\u0438\u0441\u044c: Arduino Nano\u00a0\u0438 Arduino Pro Mini \u043d\u0430 \u0447\u0438\u043f\u0430\u0445 ATmega328P-AU,\u00a0\u0438 \u043f\u0440\u043e\u0441\u0442\u043e \u043f\u0430\u0447\u043a\u0430\u00a0\"\u0433\u043e\u043b\u044b\u0445\" ATmega328P-PU. \u0415\u0441\u0442\u044c \u043d\u0435\u0441\u043a\u043e\u043b\u044c\u043a\u043e \u043f\u0440\u043e\u0441\u0442\u044b\u0445 \u0441\u043f\u043e\u0441\u043e\u0431\u043e\u0432 \u043f\u0435\u0440\u0435\u0437\u0430\u043f\u0438\u0441\u0430\u0442\u044c \u0437\u0430\u0433\u0440\u0443\u0437\u0447\u0438\u043a \u043a\u043e\u0442\u043e\u0440\u044b\u043c\u0438 \u044f \u0432\u043e\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043b\u0441\u044f (\u044d\u0442\u043e \u0434\u0430\u043b\u0435\u043a\u043e \u043d\u0435 \u0432\u0441\u0435 \u0432\u043e\u0437\u043c\u043e\u0436\u043d\u044b\u0435 \u0432\u0430\u0440\u0438\u0430\u043d\u0442\u044b).\n\n\n\n\t\u0418\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u0435 \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430\u0442\u043e\u0440\u0430 USBasp\n\n\n\n\t\u041a\u0430\u043a \u043f\u043e \u043c\u043d\u0435, \u044d\u0442\u043e \u0441\u0430\u043c\u044b\u0439 \u043f\u0440\u043e\u0441\u0442\u043e\u0439 \u0441\u043f\u043e\u0441\u043e\u0431 \u043d\u0435 \u0442\u0440\u0435\u0431\u0443\u044e\u0449\u0438\u0439 \u043d\u0438\u043a\u0430\u043a\u043e\u0439 \u043c\u0430\u0433\u0438\u0438. \u0421\u0430\u043c \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430\u0442\u043e\u0440 \u043c\u043e\u0436\u043d\u043e \u043f\u0440\u0438\u043e\u0431\u0440\u0435\u0441\u0442\u0438 \u0443 \u0431\u0440\u0430\u0442\u044c\u0435\u0432 \u041a\u0438\u0442\u0430\u0439\u0446\u0435\u0432 \u0437\u0430 $2. \u041e\u043d \u043f\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043b\u044f\u0435\u0442 \u0438\u0437 \u0441\u0435\u0431\u044f \u043f\u043b\u0430\u0442\u0443 \u0441 ATmega8 \u0438\u043b\u0438 ATmega128, USB \u043d\u0430 \u0432\u0445\u043e\u0434\u0435 \u0438 10Pin ICSP \u0438\u043d\u0442\u0435\u0440\u0444\u0435\u0439\u0441 \u043d\u0430 \u0432\u044b\u0445\u043e\u0434\u0435. \u041e\u0442 \u0441\u0442\u0430\u043d\u0434\u0430\u0440\u0442\u043d\u043e\u0433\u043e 6Pin \u0438\u043d\u0442\u0435\u0440\u0444\u0435\u0439\u0441\u0430 \u043e\u043d \u043e\u0442\u043b\u0438\u0447\u0430\u0435\u0442\u0441\u044f \u043b\u0438\u0448\u044c \u0442\u0440\u0435\u043c\u044f \u0434\u043e\u043f\u043e\u043b\u043d\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u043c\u0438 \u043f\u0438\u043d\u0430\u043c\u0438 GND \u0438 \u043e\u0434\u043d\u0438\u043c \u043d\u0435 \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u044e\u0449\u0438\u043c\u0441\u044f\u00a0NC. \u0427\u0442\u043e\u0431\u044b \u0443\u043f\u0440\u043e\u0441\u0442\u0438\u0442\u044c \u0441\u0435\u0431\u0435 \u0436\u0438\u0437\u043d\u044c, \u0441\u043e\u0432\u0435\u0442\u0443\u044e \u0441\u0440\u0430\u0437\u0443 \u0431\u0440\u0430\u0442\u044c \u043f\u0435\u0440\u0435\u0445\u043e\u0434\u043d\u0438\u043a \u0441 USBasp 10pin to 6pin \u0437\u0430 $0.5\n\n\n\n\t\u0412\u044b\u0433\u043b\u044f\u0434\u0438\u0442 \u044d\u0442\u043e \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u043c \u043e\u0431\u0440\u0430\u0437\u043e\u043c\n\n\n\n\t\n\n\n\n\t\n\n\n\n\t\u0421\u0430\u043c\u0430 \u0440\u0430\u0441\u043f\u0438\u043d\u043e\u0432\u043a\u0430 \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430\u0442\u043e\u0440\u0430 \u0438 \u0440\u0430\u0437\u044a\u0435\u043c\u043e\u0432 (\u043f\u043e\u0437\u0430\u0438\u043c\u0441\u0442\u0432\u043e\u0432\u0430\u043d\u0430 \u0443 \u0431\u0440\u0430\u0442\u044c\u0435\u0432 \u043d\u0430\u0448\u0438\u0445)\n\n\n\n\t\n\n\n\n\t\u0415\u0441\u043b\u0438 \u043d\u0430 \u043f\u043b\u0430\u0442\u0435 Arduino \u0440\u0430\u0441\u043f\u0430\u044f\u043d 6pin \u0440\u0430\u0437\u044a\u0435\u043c ICSP, \u0442\u043e \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u0435 \u0434\u043e \u0431\u0435\u0437\u043e\u0431\u0440\u0430\u0437\u0438\u044f \u043f\u0440\u043e\u0441\u0442\u043e\u0435. \u0421\u043e\u0432\u043c\u0435\u0449\u0430\u0435\u043c \u043e\u0434\u043d\u043e\u0438\u043c\u0435\u043d\u043d\u044b\u0435 \u043a\u043e\u043d\u0442\u0430\u043a\u0442\u044b \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430\u0442\u043e\u0440\u0430 \u0441 \u043f\u043b\u0430\u0442\u043e\u0439 Arduino. \u0415\u0441\u043b\u0438 \u0433\u043e\u0442\u043e\u0432\u043e\u0433\u043e \u0440\u0430\u0437\u044a\u0435\u043c\u0430 \u043d\u0435\u0442, \u0442\u043e \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0435\u043c \u0441\u043e\u043e\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u044e\u0449\u0438\u0435 \u043d\u043e\u0433\u0438 \u043d\u0430 \u043f\u043b\u0430\u0442\u0435 Arduino \u0438\u043b\u0438 \u043d\u0430 \u0441\u0430\u043c\u043e\u043c \u043c\u0438\u043a\u0440\u043e\u043a\u043e\u043d\u0442\u0440\u043e\u043b\u043b\u0435\u0440\u0435.\n\n\n\n\t\u041d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u044b\u0435 \u043d\u043e\u0433\u0438:\n\n\n\n\n\t\tGND\n\t \n\t\n\t\tVCC\n\t \n\t\n\t\tMOSI\n\t \n\t\n\t\tMISO\n\t \n\t\n\t\tRST\n\t \n\n\n\t\u0420\u0430\u0441\u043f\u0438\u043d\u043e\u0432\u043a\u0430 \u043d\u0435\u043a\u043e\u0442\u043e\u0440\u044b\u0445 \u043f\u043b\u0430\u0442 Arduino \u0438 \u043c\u0438\u043a\u0440\u043e\u043a\u043e\u043d\u0442\u0440\u043e\u043b\u043b\u0435\u0440\u043e\u0432 \u043d\u0430\u0445\u043e\u0434\u0438\u0442\u0441\u044f \u0432\u00a0\u0441\u043e\u0441\u0435\u0434\u043d\u0435\u0439 \u0442\u0435\u043c\u0435\n\n\n\n\n\n\t\u041f\u0440\u0438\u043c\u0435\u0440 \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u044f USBasp \u043a Arduino Pro Mini \u0438 \u043a ATmega328P-PU. \u0412 \u0441\u043b\u0443\u0447\u0430\u0435 \u0441 \u043f\u043e\u0441\u043b\u0435\u0434\u043d\u0438\u043c, \u043a\u043e\u043d\u0434\u0435\u043d\u0441\u0430\u0442\u043e\u0440\u044b \u043c\u043e\u0436\u043d\u043e \u0432\u044b\u043a\u0438\u043d\u0443\u0442\u044c \u0438\u0437 \u0441\u0445\u0435\u043c\u044b.\n\n\n\n\n\n\n\n\t\u0422\u0435\u043f\u0435\u0440\u044c \u0441\u0430\u043c\u043e\u0435 \u0438\u043d\u0442\u0435\u0440\u0435\u0441\u043d\u043e\u0435\n\n\n\n\n\t\t\u041f\u0435\u0440\u0435\u0445\u043e\u0434\u0438\u043c \u043d\u0430 GitHub \u043f\u0440\u043e\u0435\u043a\u0442\u0430 Optiboot (\u0441\u0441\u044b\u043b\u043a\u0430 \u0438\u043c\u0435\u0435\u0442\u0441\u044f \u0432 \u043d\u0430\u0447\u0430\u043b\u0435 \u043f\u043e\u0441\u0442\u0430) \u0438 \u0441\u043a\u0430\u0447\u0438\u0432\u0430\u0435\u043c \u0430\u0440\u0445\u0438\u0432 \u0441\u043e \u0432\u0441\u0435\u043c \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u044b\u043c.\n\t \n\t\n\t\t\u041f\u0435\u0440\u0435\u0445\u043e\u0434\u0438\u043c \u0432 \u043a\u0430\u0442\u0430\u043b\u043e\u0433\u00a0\u0433\u0434\u0435 \u0445\u0440\u0430\u043d\u044f\u0442\u0441\u044f \u0441\u043e\u0437\u0434\u0430\u043d\u043d\u044b\u0435 \u0432\u0430\u043c\u0438 \u0441\u043a\u0435\u0442\u0447\u0438 (\u0432 Windows \u044d\u0442\u043e \"\\\u041c\u043e\u0438 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b\\Arduino\\\") \u0438 \u0441\u043e\u0437\u0434\u0430\u0435\u043c \u0432 \u043d\u0435\u043c \u0432\u0435\u0442\u043a\u0443 \u043a\u0430\u0442\u0430\u043b\u043e\u0433\u043e\u0432\u00a0\\hardware\\optiboot\\avr\\\n\t \n\t\n\t\t\u0412 \u0441\u043a\u0430\u0447\u0430\u043d\u043d\u043e\u043c \u0430\u0440\u0445\u0438\u0432\u0435 \u043d\u0430\u0445\u043e\u0434\u0438\u043c \u043a\u0430\u0442\u0430\u043b\u043e\u0433 optiboot\u00a0\u0438 \u043f\u0435\u0440\u0435\u043d\u043e\u0441\u0438\u043c \u0432\u0441\u0435 \u0435\u0433\u043e \u0441\u043e\u0434\u0435\u0440\u0436\u0438\u043c\u043e\u0435 \u0432 \u043a\u0430\u0442\u0430\u043b\u043e\u0433 \u0441\u043e\u0437\u0434\u0430\u043d\u043d\u044b\u0439 \u0432 \u043f\u0440\u0435\u0434\u044b\u0434\u0443\u0449\u0435\u043c \u043f\u0443\u043d\u043a\u0442\u0435.\n\t \n\t\n\t\t\u0421\u0440\u0435\u0434\u0438 \u0432\u0441\u0435\u0445 \u043f\u0435\u0440\u0435\u043d\u0435\u0441\u0435\u043d\u043d\u044b\u0445 \u0444\u0430\u0439\u043b\u043e\u0432 \u043d\u0430\u0445\u043e\u0434\u0438\u043c\u00a0boards.txt\u00a0\u0443\u0434\u0430\u043b\u044f\u0435\u043c \u0435\u0433\u043e. \u041e\u043d \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u0443\u0441\u0442\u0430\u0440\u0435\u0432\u0448\u0438\u043c \u0438 \u0431\u043e\u043b\u0435\u0435 \u043d\u0430\u0441 \u043d\u0435 \u0438\u043d\u0442\u0435\u0440\u0435\u0441\u0443\u0435\u0442!\n\t \n\t\n\t\t\u041d\u0430\u0445\u043e\u0434\u0438\u043c \u0444\u0430\u0439\u043b\u00a0boards-1.6.txt \u0438 \u043f\u0435\u0440\u0435\u0438\u043c\u0435\u043d\u043e\u0432\u044b\u0432\u0430\u0435\u043c \u0432\u00a0boards.txt, \u0432 \u0438\u0442\u043e\u0433\u0435 \u0434\u043e\u043b\u0436\u043d\u043e \u043f\u043e\u043b\u0443\u0447\u0438\u0442\u0441\u044f \u043a\u0430\u043a \u043d\u0430 \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0438 \u043d\u0438\u0436\u0435\n\t\t\n\n\t\t\n\t\t\t\u00a0\n\t\t\n\t \n\t\n\t\t\u041f\u0435\u0440\u0435\u0437\u0430\u043f\u0443\u0441\u043a\u0430\u0435\u043c \u0441\u0440\u0435\u0437\u0443 Arduino IDE\n\t \n\t\n\t\t\u041f\u0440\u043e\u0432\u0435\u0440\u044f\u0435\u043c \u0441\u043f\u0438\u0441\u043e\u043a \u043f\u043b\u0430\u0442\u00a0\u0432\u043e \u0432\u043a\u043b\u0430\u0434\u043a\u0435 \"\u0418\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u044b\" \u0438 \u043d\u0430\u0441\u043b\u0430\u0436\u0434\u0430\u0435\u043c\u0441\u044f \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u043e\u043c\n\t \n\n\n\n\t\u041f\u0440\u0438 \u0445\u0440\u0430\u043d\u0435\u043d\u0438\u0438 \u0432\u0441\u0435\u0445 \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u044b\u0445 \u0444\u0430\u0439\u043b\u043e\u0432 \u0432\u043d\u0435 \u0441\u0440\u0435\u0434\u044b \u0440\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0438 Arduino IDE \u043f\u043e\u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0435\u0435 \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u0435 \u0441\u0430\u043c\u043e\u0439 \u0441\u0440\u0435\u0434\u044b \u043d\u0435 \u043f\u043e\u0437\u0432\u043e\u043b\u0438\u0442 \u0412\u0430\u043c \u043f\u043e\u0442\u0435\u0440\u044f\u0442\u044c \u043d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438 \u0438 \u0444\u0430\u0439\u043b\u044b \u0437\u0430\u0433\u0440\u0443\u0437\u0447\u0438\u043a\u0430 Optiboot \u0432 \u043e\u0442\u043b\u0438\u0447\u0438\u0435 \u043e\u0442 \u043f\u0440\u044f\u043c\u043e\u0433\u043e \u0432\u043c\u0435\u0448\u0430\u0442\u0435\u043b\u044c\u0441\u0442\u0432\u0430 \u0432 \u043e\u0440\u0438\u0433\u0438\u043d\u0430\u043b\u044c\u043d\u044b\u0439\u00a0boards.txt\n\n\n\n\t\u041b\u0435\u043d\u0438\u0432\u044b\u0435 \u043c\u043e\u0433\u0443\u0442 \u0437\u0430\u0431\u0440\u0430\u0442\u044c \u0433\u043e\u0442\u043e\u0432\u044b\u0439 \u0430\u0440\u0445\u0438\u0432 \u0441\u043e \u0432\u0441\u0435\u043c\u0438 \u0438\u0437\u043c\u0435\u043d\u0435\u043d\u0438\u044f\u043c\u0438 \u0438 \u0440\u0430\u0441\u043f\u0430\u043a\u043e\u0432\u0430\u0442\u044c\u00a0\u0435\u0433\u043e \u0441\u043e\u0434\u0435\u0440\u0436\u0438\u043c\u043e\u0435 \u0432 \u043f\u0430\u043f\u043a\u0443 \u0441\u043e \u0441\u043a\u0435\u0442\u0447\u0430\u043c\u0438. \u0412 \u0434\u0430\u043d\u043d\u043e\u043c \u0441\u043b\u0443\u0447\u0430\u0435 \u0432\u0441\u0435 \u0434\u043e\u0441\u0442\u0430\u0442\u043e\u0447\u043d\u043e \u0442\u043e\u043b\u044c\u043a\u043e \u043f\u0435\u0440\u0435\u0437\u0430\u043f\u0443\u0441\u0442\u0438\u0442\u044c \u0441\u0440\u0435\u0434\u0443 \u0440\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0438. \u0421\u0430\u043c \u0430\u0440\u0445\u0438\u0432 \u043f\u0440\u0438\u043a\u0440\u0435\u043f\u043b\u0435\u043d \u043a \u043f\u043e\u0441\u0442\u0443.\n\n\n\n\t\u0412\u044b\u0431\u0438\u0440\u0430\u0435\u043c \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430\u0442\u043e\u0440 USBasp\n\n\n\n\t\n\n\n\n\t\u0418 \u0436\u043c\u0435\u043c \"\u0417\u0430\u043f\u0438\u0441\u0430\u0442\u044c \u0437\u0430\u0433\u0440\u0443\u0437\u0447\u0438\u043a\".\n\n\n\n\t\u0412\u0410\u0416\u041d\u041e: \u0415\u0441\u043b\u0438 \u0436\u0435\u043b\u0430\u0435\u0442\u0435 \u0437\u0430\u043b\u0438\u0442\u044c \u0441\u043a\u0435\u0442\u0447 \u0447\u0435\u0440\u0435\u0437 USBasp, \u0442\u043e \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u043e \u043d\u0430\u0436\u0438\u043c\u0430\u0442\u044c \"\u0417\u0430\u043f\u0438\u0441\u0430\u0442\u044c\\\u0412\u0433\u0440\u0443\u0437\u0438\u0442\u044c\" \u043f\u0440\u0438 \u0437\u0430\u0436\u0430\u0442\u043e\u0439 \u043a\u043b\u0430\u0432\u0438\u0448\u0438 SHIFT. \u0422\u043e\u043b\u044c\u043a\u043e \u0432 \u044d\u0442\u043e\u043c \u0441\u043b\u0443\u0447\u0430\u0435 \u0431\u0443\u0434\u0435\u0442 \u0432\u044b\u0431\u0440\u0430\u043d \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430\u0442\u043e\u0440 \u0434\u043b\u044f \u0437\u0430\u043b\u0438\u0432\u043a\u0438, \u0430 \u0441\u043e\u043e\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u044e\u0449\u0430\u044f \u043f\u043e\u0434\u0441\u043a\u0430\u0437\u043a\u0430 \u0438\u0437\u043c\u0435\u043d\u0438\u0442\u0441\u044f \u0437\u0430 \"\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044c \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430\u0442\u043e\u0440\".\n\n\n\n\t\n\n\n\n\t\u0412 \u0445\u043e\u0434\u0435 \u0434\u0430\u043d\u043d\u043e\u0439 \u043e\u043f\u0435\u0440\u0430\u0446\u0438\u0438 \u043c\u043e\u0433\u0443\u0442 \u0441\u044b\u043f\u0430\u0442\u044c\u0441\u044f \u043e\u0448\u0438\u0431\u043a\u0438 \u0443\u043a\u0430\u0437\u044b\u0432\u0430\u044e\u0449\u0438\u0435 \u043d\u0430 \u043f\u0440\u043e\u0431\u043b\u0435\u043c\u044b \u0441 USBasp.\n\n\n\n\n\n\t\u041f\u043e\u043f\u0440\u043e\u0441\u0442\u0443 \u0438\u0433\u043d\u043e\u0440\u0438\u0440\u0443\u0435\u043c \u0438\u0445!\n\n\n\n\t\u0418\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u0435 Arduino \u0432 \u043a\u0430\u0447\u0435\u0441\u0442\u0432\u0435 \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430\u0442\u043e\u0440\u0430\n\n\n\n\t\u041d\u0430\u043c \u043f\u043e\u043d\u0430\u0434\u043e\u0431\u0438\u0442\u0441\u044f \u0432\u0442\u043e\u0440\u0430\u044f \u043f\u043b\u0430\u0442\u0430 Arduino. \u041f\u0440\u043e\u0448\u0438\u0432\u0430\u0435\u043c \u0435\u0451 \u0441\u043a\u0435\u0442\u0447\u0435\u043c ArduinoISP, \u0438\u0434\u0443\u0449\u0438\u043c \u043f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e \u0441\u043e \u0441\u0440\u0435\u0434\u043e\u0439 \u0440\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0438. \u041f\u043e\u0441\u043b\u0435 \u044d\u0442\u043e\u0433\u043e Arduino \u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u0441\u044f \u043f\u043e\u043b\u043d\u043e\u0446\u0435\u043d\u043d\u044b\u043c \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430\u0442\u043e\u0440\u043e\u043c.\n\n\n\n// pin name:    not-mega:         mega(1280 and 2560)\n// slave reset: 10:               53\n// MOSI:        11:               51\n// MISO:        12:               50\n// SCK:         13:               52\n\n\n\t\u0412 \u0441\u043a\u0435\u0442\u0447\u0435 \u0438\u043c\u0435\u0435\u0442\u0441\u044f \u043f\u043e\u0434\u0441\u043a\u0430\u0437\u043a\u0430 \u0441 \u0441\u043f\u043e\u0441\u043e\u0431\u043e\u043c \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u044f.\n\n\n\n\n\n\n\n\t\u0418\u0437\u043c\u0435\u043d\u044f\u0435\u043c \u0432 Arduino IDE \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430\u0442\u043e\u0440 \u043d\u0430\u00a0\u00a0Arduino as ISP, \u0432\u044b\u0431\u0438\u0440\u0430\u0435\u043c \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u0443\u044e \u043f\u043b\u0430\u0442\u0443, \u043a \u043a\u043e\u0442\u043e\u0440\u043e\u0439 \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d \u043d\u0430\u0448 \u0432\u043d\u043e\u0432\u044c \u0438\u0441\u043f\u0435\u0447\u0435\u043d\u043d\u044b\u0439 \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430\u0442\u043e\u0440 \u0438 \"\u043f\u0440\u043e\u0436\u0438\u0433\u0430\u0435\u043c\" \u0437\u0430\u0433\u0440\u0443\u0437\u0447\u0438\u043a.\n\n\n\n\t\n\n\n\n\t\u0415\u0441\u043b\u0438 \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u043e \u0437\u0430\u043f\u0438\u0441\u0430\u0442\u044c \u043a\u0430\u043a\u043e\u0439 \u043b\u0438\u0431\u043e \u0441\u043a\u0435\u0442\u0447, \u0442\u043e \u0434\u0435\u043b\u0430\u0435\u043c \u044d\u0442\u043e \u0442\u0430\u043a\u0436\u0435 \u043f\u0440\u0438 \u0437\u0430\u0436\u0430\u0442\u043e\u0439 \u043a\u043b\u0430\u0432\u0438\u0448\u0438 SHIFT (\u043a\u0430\u043a \u0438 \u0432 \u043f\u0435\u0440\u0432\u043e\u043c \u0432\u0430\u0440\u0438\u0430\u043d\u0442\u0435).\n\n\n\n\tPS:\u00a0\u041f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e \u0432 \u0441\u0440\u0435\u0434\u0435 \u0440\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0438 \u0438\u043c\u0435\u044e\u0442\u0441\u044f \u0444\u0430\u0439\u043b\u044b \u0437\u0430\u0433\u0440\u0443\u0437\u0447\u0438\u043a\u0430 optiboot \u0438 \u0441\u043a\u0430\u0447\u0438\u0432\u0430\u0442\u044c \u043d\u0438\u0447\u0435\u0433\u043e \u043d\u0435 \u043d\u0443\u0436\u043d\u043e. \u0414\u043e\u0441\u0442\u0430\u0442\u043e\u0447\u043d\u043e \u0432\u044b\u0431\u0440\u0430\u0442\u044c \u043f\u043b\u0430\u0442\u0443 Arduino UNO \u0438 \u043f\u0435\u0440\u0435\u0437\u0430\u043f\u0438\u0441\u0430\u0442\u044c \u0437\u0430\u0433\u0440\u0443\u0437\u0447\u0438\u043a. \u041d\u043e \u0432 \u044d\u0442\u043e\u043c \u0441\u043b\u0443\u0447\u0430\u0435 \u0412\u0430\u0448\u0435 \u0434\u0435\u0442\u0438\u0449\u0435 \u0441\u0442\u0430\u043d\u0435\u0442 \u043e\u043f\u0440\u0435\u0434\u0435\u043b\u044f\u0442\u044c\u0441\u044f \u0438\u043c\u0435\u043d\u043d\u043e \u043a\u0430\u043a UNO, \u0434\u0430\u0436\u0435 \u0435\u0441\u043b\u0438 \u043d\u0430 \u0441\u0430\u043c\u043e\u043c \u0434\u0435\u043b\u0435 \u044d\u0442\u043e NANO, Pro Mini \u0438\u043b\u0438 \u0435\u0449\u0435 \u0447\u0442\u043e-\u0442\u043e.\n\n\n\n\thardware.zip\n\n",
+    "dateCreated": "2015-10-11T20:05:34+0000",
+    "datePublished": "2015-10-11T20:05:34+0000",
+    "pageStart": 1,
+    "pageEnd": 1,
+    "image": "https://pp.userapi.com/c639522/v639522919/5e2ea/-KPsq33Xx_Q.jpg",
+    "author": {
+        "@type": "Person",
+        "name": "Kitsum",
+        "image": "https://pp.userapi.com/c639522/v639522919/5e2ea/-KPsq33Xx_Q.jpg",
+        "url": "https://it4it.club/profile/3-kitsum/"
+    },
+    "interactionStatistic": [
+        {
+            "@type": "InteractionCounter",
+            "interactionType": "http://schema.org/ViewAction",
+            "userInteractionCount": 26577
+        },
+        {
+            "@type": "InteractionCounter",
+            "interactionType": "http://schema.org/CommentAction",
+            "userInteractionCount": 2
+        },
+        {
+            "@type": "InteractionCounter",
+            "interactionType": "http://schema.org/FollowAction",
+            "userInteractionCount": 3
+        }
+    ],
+    "comment": [
+        {
+            "@type": "Comment",
+            "url": "https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/?do=findComment\u0026comment=25",
+            "author": {
+                "@type": "Person",
+                "name": "Kitsum",
+                "image": "https://pp.userapi.com/c639522/v639522919/5e2ea/-KPsq33Xx_Q.jpg",
+                "url": "https://it4it.club/profile/3-kitsum/"
+            },
+            "dateCreated": "2015-10-11T20:05:34+0000",
+            "text": "\n\tUpdate 02.12.2015\n\n\n\n\n\t\t\u0421\u0442\u0430\u0442\u044c\u044f \u043f\u0435\u0440\u0435\u0440\u0430\u0431\u043e\u0442\u0430\u043d\u0430 \u0438 \u043f\u0435\u0440\u0435\u043f\u0440\u043e\u0432\u0435\u0440\u0435\u043d\u0430\n\t \n\t\n\t\t\u0410\u043a\u0442\u0443\u0430\u043b\u044c\u043d\u043e \u0434\u043b\u044f Optiboot 6.2 \u0438\u00a0Arduino IDE 1.6.6\u00a0\u0438\u043b\u0438 \u0432\u044b\u0448\u0435.\n\t \n\n\n\t\u0420\u0430\u043d\u043e \u0438\u043b\u0438 \u043f\u043e\u0437\u0434\u043d\u043e \u043f\u0440\u0438\u0445\u043e\u0434\u0438\u0442\u0441\u044f \u0441\u0442\u043e\u043b\u043a\u043d\u0443\u0442\u044c\u0441\u044f \u0441 \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u043e\u0441\u0442\u044c\u044e \u0437\u0430\u043c\u0435\u043d\u044b\u00a0bootloader (\u0437\u0430\u0433\u0440\u0443\u0437\u0447\u0438\u043a\u0430) \u043c\u0438\u043a\u0440\u043e\u043a\u043e\u043d\u0442\u0440\u043e\u043b\u043b\u0435\u0440\u0430. \u0412 \u043c\u043e\u0451\u043c \u0441\u043b\u0443\u0447\u0430\u0435 \u043e\u0441\u0442\u0440\u043e \u043f\u043e\u0442\u0440\u0435\u0431\u043e\u0432\u0430\u043b\u0441\u044f \u0444\u0443\u043d\u043a\u0446\u0438\u043e\u043d\u0430\u043b \u0437\u0430\u0433\u0440\u0443\u0437\u0447\u0438\u043a\u0430\u00a0Optiboot, \u0438\u0437-\u0437\u0430 \u0440\u0435\u0430\u043b\u0438\u0437\u043e\u0432\u0430\u043d\u043d\u043e\u0433\u043e \u0432 \u043d\u0435\u043c \u0441\u0442\u043e\u0440\u043e\u0436\u0435\u0432\u043e\u0433\u043e \u0442\u0430\u0439\u043c\u0435\u0440\u0430 (watchdog). \u041f\u043b\u044e\u0441 \u043a\u043e \u0432\u0441\u0435\u043c\u0443, \u043e\u043d \u0432\u0435\u0441\u0438\u0442 \u0432 \u0447\u0435\u0442\u044b\u0440\u0435 \u0440\u0430\u0437\u0430 \u043c\u0435\u043d\u044c\u0448\u0435 \u0441\u0442\u0430\u043d\u0434\u0430\u0440\u0442\u043d\u043e\u0433\u043e \u0438 \u043e\u0441\u0432\u043e\u0431\u043e\u0436\u0434\u0430\u0435\u0442 \u0434\u043e\u043f\u043e\u043b\u043d\u0438\u0442\u0435\u043b\u044c\u043d\u043e 1.5kb \u043f\u0430\u043c\u044f\u0442\u0438 \u0434\u043b\u044f\u00a0\u0441\u043a\u0435\u0442\u0447\u0430!\n\n\n\n\t\u0421\u0440\u0430\u0437\u0443 \u0445\u043e\u0447\u0443 \u043e\u0442\u043c\u0435\u0442\u0438\u0442\u044c, \u0447\u0442\u043e Optiboot \u0437\u0430\u043b\u0438\u0442\u00a0\u043f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e \u043d\u0430 Arduino UNO \u0438\u00a0Mega 2560.\n\n\n\n\t\u0423 \u043c\u0435\u043d\u044f \u0432 \u043d\u0430\u043b\u0438\u0447\u0438\u0438 \u0438\u043c\u0435\u043b\u0438\u0441\u044c: Arduino Nano\u00a0\u0438 Arduino Pro Mini \u043d\u0430 \u0447\u0438\u043f\u0430\u0445 ATmega328P-AU,\u00a0\u0438 \u043f\u0440\u043e\u0441\u0442\u043e \u043f\u0430\u0447\u043a\u0430\u00a0\"\u0433\u043e\u043b\u044b\u0445\" ATmega328P-PU. \u0415\u0441\u0442\u044c \u043d\u0435\u0441\u043a\u043e\u043b\u044c\u043a\u043e \u043f\u0440\u043e\u0441\u0442\u044b\u0445 \u0441\u043f\u043e\u0441\u043e\u0431\u043e\u0432 \u043f\u0435\u0440\u0435\u0437\u0430\u043f\u0438\u0441\u0430\u0442\u044c \u0437\u0430\u0433\u0440\u0443\u0437\u0447\u0438\u043a \u043a\u043e\u0442\u043e\u0440\u044b\u043c\u0438 \u044f \u0432\u043e\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043b\u0441\u044f (\u044d\u0442\u043e \u0434\u0430\u043b\u0435\u043a\u043e \u043d\u0435 \u0432\u0441\u0435 \u0432\u043e\u0437\u043c\u043e\u0436\u043d\u044b\u0435 \u0432\u0430\u0440\u0438\u0430\u043d\u0442\u044b).\n\n\n\n\t\u0418\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u0435 \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430\u0442\u043e\u0440\u0430 USBasp\n\n\n\n\t\u041a\u0430\u043a \u043f\u043e \u043c\u043d\u0435, \u044d\u0442\u043e \u0441\u0430\u043c\u044b\u0439 \u043f\u0440\u043e\u0441\u0442\u043e\u0439 \u0441\u043f\u043e\u0441\u043e\u0431 \u043d\u0435 \u0442\u0440\u0435\u0431\u0443\u044e\u0449\u0438\u0439 \u043d\u0438\u043a\u0430\u043a\u043e\u0439 \u043c\u0430\u0433\u0438\u0438. \u0421\u0430\u043c \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430\u0442\u043e\u0440 \u043c\u043e\u0436\u043d\u043e \u043f\u0440\u0438\u043e\u0431\u0440\u0435\u0441\u0442\u0438 \u0443 \u0431\u0440\u0430\u0442\u044c\u0435\u0432 \u041a\u0438\u0442\u0430\u0439\u0446\u0435\u0432 \u0437\u0430 $2. \u041e\u043d \u043f\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043b\u044f\u0435\u0442 \u0438\u0437 \u0441\u0435\u0431\u044f \u043f\u043b\u0430\u0442\u0443 \u0441 ATmega8 \u0438\u043b\u0438 ATmega128, USB \u043d\u0430 \u0432\u0445\u043e\u0434\u0435 \u0438 10Pin ICSP \u0438\u043d\u0442\u0435\u0440\u0444\u0435\u0439\u0441 \u043d\u0430 \u0432\u044b\u0445\u043e\u0434\u0435. \u041e\u0442 \u0441\u0442\u0430\u043d\u0434\u0430\u0440\u0442\u043d\u043e\u0433\u043e 6Pin \u0438\u043d\u0442\u0435\u0440\u0444\u0435\u0439\u0441\u0430 \u043e\u043d \u043e\u0442\u043b\u0438\u0447\u0430\u0435\u0442\u0441\u044f \u043b\u0438\u0448\u044c \u0442\u0440\u0435\u043c\u044f \u0434\u043e\u043f\u043e\u043b\u043d\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u043c\u0438 \u043f\u0438\u043d\u0430\u043c\u0438 GND \u0438 \u043e\u0434\u043d\u0438\u043c \u043d\u0435 \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u044e\u0449\u0438\u043c\u0441\u044f\u00a0NC. \u0427\u0442\u043e\u0431\u044b \u0443\u043f\u0440\u043e\u0441\u0442\u0438\u0442\u044c \u0441\u0435\u0431\u0435 \u0436\u0438\u0437\u043d\u044c, \u0441\u043e\u0432\u0435\u0442\u0443\u044e \u0441\u0440\u0430\u0437\u0443 \u0431\u0440\u0430\u0442\u044c \u043f\u0435\u0440\u0435\u0445\u043e\u0434\u043d\u0438\u043a \u0441 USBasp 10pin to 6pin \u0437\u0430 $0.5\n\n\n\n\t\u0412\u044b\u0433\u043b\u044f\u0434\u0438\u0442 \u044d\u0442\u043e \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u043c \u043e\u0431\u0440\u0430\u0437\u043e\u043c\n\n\n\n\t\n\n\n\n\t\n\n\n\n\t\u0421\u0430\u043c\u0430 \u0440\u0430\u0441\u043f\u0438\u043d\u043e\u0432\u043a\u0430 \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430\u0442\u043e\u0440\u0430 \u0438 \u0440\u0430\u0437\u044a\u0435\u043c\u043e\u0432 (\u043f\u043e\u0437\u0430\u0438\u043c\u0441\u0442\u0432\u043e\u0432\u0430\u043d\u0430 \u0443 \u0431\u0440\u0430\u0442\u044c\u0435\u0432 \u043d\u0430\u0448\u0438\u0445)\n\n\n\n\t\n\n\n\n\t\u0415\u0441\u043b\u0438 \u043d\u0430 \u043f\u043b\u0430\u0442\u0435 Arduino \u0440\u0430\u0441\u043f\u0430\u044f\u043d 6pin \u0440\u0430\u0437\u044a\u0435\u043c ICSP, \u0442\u043e \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u0435 \u0434\u043e \u0431\u0435\u0437\u043e\u0431\u0440\u0430\u0437\u0438\u044f \u043f\u0440\u043e\u0441\u0442\u043e\u0435. \u0421\u043e\u0432\u043c\u0435\u0449\u0430\u0435\u043c \u043e\u0434\u043d\u043e\u0438\u043c\u0435\u043d\u043d\u044b\u0435 \u043a\u043e\u043d\u0442\u0430\u043a\u0442\u044b \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430\u0442\u043e\u0440\u0430 \u0441 \u043f\u043b\u0430\u0442\u043e\u0439 Arduino. \u0415\u0441\u043b\u0438 \u0433\u043e\u0442\u043e\u0432\u043e\u0433\u043e \u0440\u0430\u0437\u044a\u0435\u043c\u0430 \u043d\u0435\u0442, \u0442\u043e \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0435\u043c \u0441\u043e\u043e\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u044e\u0449\u0438\u0435 \u043d\u043e\u0433\u0438 \u043d\u0430 \u043f\u043b\u0430\u0442\u0435 Arduino \u0438\u043b\u0438 \u043d\u0430 \u0441\u0430\u043c\u043e\u043c \u043c\u0438\u043a\u0440\u043e\u043a\u043e\u043d\u0442\u0440\u043e\u043b\u043b\u0435\u0440\u0435.\n\n\n\n\t\u041d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u044b\u0435 \u043d\u043e\u0433\u0438:\n\n\n\n\n\t\tGND\n\t \n\t\n\t\tVCC\n\t \n\t\n\t\tMOSI\n\t \n\t\n\t\tMISO\n\t \n\t\n\t\tRST\n\t \n\n\n\t\u0420\u0430\u0441\u043f\u0438\u043d\u043e\u0432\u043a\u0430 \u043d\u0435\u043a\u043e\u0442\u043e\u0440\u044b\u0445 \u043f\u043b\u0430\u0442 Arduino \u0438 \u043c\u0438\u043a\u0440\u043e\u043a\u043e\u043d\u0442\u0440\u043e\u043b\u043b\u0435\u0440\u043e\u0432 \u043d\u0430\u0445\u043e\u0434\u0438\u0442\u0441\u044f \u0432\u00a0\u0441\u043e\u0441\u0435\u0434\u043d\u0435\u0439 \u0442\u0435\u043c\u0435\n\n\n\n\n\n\t\u041f\u0440\u0438\u043c\u0435\u0440 \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u044f USBasp \u043a Arduino Pro Mini \u0438 \u043a ATmega328P-PU. \u0412 \u0441\u043b\u0443\u0447\u0430\u0435 \u0441 \u043f\u043e\u0441\u043b\u0435\u0434\u043d\u0438\u043c, \u043a\u043e\u043d\u0434\u0435\u043d\u0441\u0430\u0442\u043e\u0440\u044b \u043c\u043e\u0436\u043d\u043e \u0432\u044b\u043a\u0438\u043d\u0443\u0442\u044c \u0438\u0437 \u0441\u0445\u0435\u043c\u044b.\n\n\n\n\n\n\n\n\t\u0422\u0435\u043f\u0435\u0440\u044c \u0441\u0430\u043c\u043e\u0435 \u0438\u043d\u0442\u0435\u0440\u0435\u0441\u043d\u043e\u0435\n\n\n\n\n\t\t\u041f\u0435\u0440\u0435\u0445\u043e\u0434\u0438\u043c \u043d\u0430 GitHub \u043f\u0440\u043e\u0435\u043a\u0442\u0430 Optiboot (\u0441\u0441\u044b\u043b\u043a\u0430 \u0438\u043c\u0435\u0435\u0442\u0441\u044f \u0432 \u043d\u0430\u0447\u0430\u043b\u0435 \u043f\u043e\u0441\u0442\u0430) \u0438 \u0441\u043a\u0430\u0447\u0438\u0432\u0430\u0435\u043c \u0430\u0440\u0445\u0438\u0432 \u0441\u043e \u0432\u0441\u0435\u043c \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u044b\u043c.\n\t \n\t\n\t\t\u041f\u0435\u0440\u0435\u0445\u043e\u0434\u0438\u043c \u0432 \u043a\u0430\u0442\u0430\u043b\u043e\u0433\u00a0\u0433\u0434\u0435 \u0445\u0440\u0430\u043d\u044f\u0442\u0441\u044f \u0441\u043e\u0437\u0434\u0430\u043d\u043d\u044b\u0435 \u0432\u0430\u043c\u0438 \u0441\u043a\u0435\u0442\u0447\u0438 (\u0432 Windows \u044d\u0442\u043e \"\\\u041c\u043e\u0438 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b\\Arduino\\\") \u0438 \u0441\u043e\u0437\u0434\u0430\u0435\u043c \u0432 \u043d\u0435\u043c \u0432\u0435\u0442\u043a\u0443 \u043a\u0430\u0442\u0430\u043b\u043e\u0433\u043e\u0432\u00a0\\hardware\\optiboot\\avr\\\n\t \n\t\n\t\t\u0412 \u0441\u043a\u0430\u0447\u0430\u043d\u043d\u043e\u043c \u0430\u0440\u0445\u0438\u0432\u0435 \u043d\u0430\u0445\u043e\u0434\u0438\u043c \u043a\u0430\u0442\u0430\u043b\u043e\u0433 optiboot\u00a0\u0438 \u043f\u0435\u0440\u0435\u043d\u043e\u0441\u0438\u043c \u0432\u0441\u0435 \u0435\u0433\u043e \u0441\u043e\u0434\u0435\u0440\u0436\u0438\u043c\u043e\u0435 \u0432 \u043a\u0430\u0442\u0430\u043b\u043e\u0433 \u0441\u043e\u0437\u0434\u0430\u043d\u043d\u044b\u0439 \u0432 \u043f\u0440\u0435\u0434\u044b\u0434\u0443\u0449\u0435\u043c \u043f\u0443\u043d\u043a\u0442\u0435.\n\t \n\t\n\t\t\u0421\u0440\u0435\u0434\u0438 \u0432\u0441\u0435\u0445 \u043f\u0435\u0440\u0435\u043d\u0435\u0441\u0435\u043d\u043d\u044b\u0445 \u0444\u0430\u0439\u043b\u043e\u0432 \u043d\u0430\u0445\u043e\u0434\u0438\u043c\u00a0boards.txt\u00a0\u0443\u0434\u0430\u043b\u044f\u0435\u043c \u0435\u0433\u043e. \u041e\u043d \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u0443\u0441\u0442\u0430\u0440\u0435\u0432\u0448\u0438\u043c \u0438 \u0431\u043e\u043b\u0435\u0435 \u043d\u0430\u0441 \u043d\u0435 \u0438\u043d\u0442\u0435\u0440\u0435\u0441\u0443\u0435\u0442!\n\t \n\t\n\t\t\u041d\u0430\u0445\u043e\u0434\u0438\u043c \u0444\u0430\u0439\u043b\u00a0boards-1.6.txt \u0438 \u043f\u0435\u0440\u0435\u0438\u043c\u0435\u043d\u043e\u0432\u044b\u0432\u0430\u0435\u043c \u0432\u00a0boards.txt, \u0432 \u0438\u0442\u043e\u0433\u0435 \u0434\u043e\u043b\u0436\u043d\u043e \u043f\u043e\u043b\u0443\u0447\u0438\u0442\u0441\u044f \u043a\u0430\u043a \u043d\u0430 \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0438 \u043d\u0438\u0436\u0435\n\t\t\n\n\t\t\n\t\t\t\u00a0\n\t\t\n\t \n\t\n\t\t\u041f\u0435\u0440\u0435\u0437\u0430\u043f\u0443\u0441\u043a\u0430\u0435\u043c \u0441\u0440\u0435\u0437\u0443 Arduino IDE\n\t \n\t\n\t\t\u041f\u0440\u043e\u0432\u0435\u0440\u044f\u0435\u043c \u0441\u043f\u0438\u0441\u043e\u043a \u043f\u043b\u0430\u0442\u00a0\u0432\u043e \u0432\u043a\u043b\u0430\u0434\u043a\u0435 \"\u0418\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u044b\" \u0438 \u043d\u0430\u0441\u043b\u0430\u0436\u0434\u0430\u0435\u043c\u0441\u044f \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u043e\u043c\n\t \n\n\n\n\t\u041f\u0440\u0438 \u0445\u0440\u0430\u043d\u0435\u043d\u0438\u0438 \u0432\u0441\u0435\u0445 \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u044b\u0445 \u0444\u0430\u0439\u043b\u043e\u0432 \u0432\u043d\u0435 \u0441\u0440\u0435\u0434\u044b \u0440\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0438 Arduino IDE \u043f\u043e\u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0435\u0435 \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u0435 \u0441\u0430\u043c\u043e\u0439 \u0441\u0440\u0435\u0434\u044b \u043d\u0435 \u043f\u043e\u0437\u0432\u043e\u043b\u0438\u0442 \u0412\u0430\u043c \u043f\u043e\u0442\u0435\u0440\u044f\u0442\u044c \u043d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438 \u0438 \u0444\u0430\u0439\u043b\u044b \u0437\u0430\u0433\u0440\u0443\u0437\u0447\u0438\u043a\u0430 Optiboot \u0432 \u043e\u0442\u043b\u0438\u0447\u0438\u0435 \u043e\u0442 \u043f\u0440\u044f\u043c\u043e\u0433\u043e \u0432\u043c\u0435\u0448\u0430\u0442\u0435\u043b\u044c\u0441\u0442\u0432\u0430 \u0432 \u043e\u0440\u0438\u0433\u0438\u043d\u0430\u043b\u044c\u043d\u044b\u0439\u00a0boards.txt\n\n\n\n\t\u041b\u0435\u043d\u0438\u0432\u044b\u0435 \u043c\u043e\u0433\u0443\u0442 \u0437\u0430\u0431\u0440\u0430\u0442\u044c \u0433\u043e\u0442\u043e\u0432\u044b\u0439 \u0430\u0440\u0445\u0438\u0432 \u0441\u043e \u0432\u0441\u0435\u043c\u0438 \u0438\u0437\u043c\u0435\u043d\u0435\u043d\u0438\u044f\u043c\u0438 \u0438 \u0440\u0430\u0441\u043f\u0430\u043a\u043e\u0432\u0430\u0442\u044c\u00a0\u0435\u0433\u043e \u0441\u043e\u0434\u0435\u0440\u0436\u0438\u043c\u043e\u0435 \u0432 \u043f\u0430\u043f\u043a\u0443 \u0441\u043e \u0441\u043a\u0435\u0442\u0447\u0430\u043c\u0438. \u0412 \u0434\u0430\u043d\u043d\u043e\u043c \u0441\u043b\u0443\u0447\u0430\u0435 \u0432\u0441\u0435 \u0434\u043e\u0441\u0442\u0430\u0442\u043e\u0447\u043d\u043e \u0442\u043e\u043b\u044c\u043a\u043e \u043f\u0435\u0440\u0435\u0437\u0430\u043f\u0443\u0441\u0442\u0438\u0442\u044c \u0441\u0440\u0435\u0434\u0443 \u0440\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0438. \u0421\u0430\u043c \u0430\u0440\u0445\u0438\u0432 \u043f\u0440\u0438\u043a\u0440\u0435\u043f\u043b\u0435\u043d \u043a \u043f\u043e\u0441\u0442\u0443.\n\n\n\n\t\u0412\u044b\u0431\u0438\u0440\u0430\u0435\u043c \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430\u0442\u043e\u0440 USBasp\n\n\n\n\t\n\n\n\n\t\u0418 \u0436\u043c\u0435\u043c \"\u0417\u0430\u043f\u0438\u0441\u0430\u0442\u044c \u0437\u0430\u0433\u0440\u0443\u0437\u0447\u0438\u043a\".\n\n\n\n\t\u0412\u0410\u0416\u041d\u041e: \u0415\u0441\u043b\u0438 \u0436\u0435\u043b\u0430\u0435\u0442\u0435 \u0437\u0430\u043b\u0438\u0442\u044c \u0441\u043a\u0435\u0442\u0447 \u0447\u0435\u0440\u0435\u0437 USBasp, \u0442\u043e \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u043e \u043d\u0430\u0436\u0438\u043c\u0430\u0442\u044c \"\u0417\u0430\u043f\u0438\u0441\u0430\u0442\u044c\\\u0412\u0433\u0440\u0443\u0437\u0438\u0442\u044c\" \u043f\u0440\u0438 \u0437\u0430\u0436\u0430\u0442\u043e\u0439 \u043a\u043b\u0430\u0432\u0438\u0448\u0438 SHIFT. \u0422\u043e\u043b\u044c\u043a\u043e \u0432 \u044d\u0442\u043e\u043c \u0441\u043b\u0443\u0447\u0430\u0435 \u0431\u0443\u0434\u0435\u0442 \u0432\u044b\u0431\u0440\u0430\u043d \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430\u0442\u043e\u0440 \u0434\u043b\u044f \u0437\u0430\u043b\u0438\u0432\u043a\u0438, \u0430 \u0441\u043e\u043e\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u044e\u0449\u0430\u044f \u043f\u043e\u0434\u0441\u043a\u0430\u0437\u043a\u0430 \u0438\u0437\u043c\u0435\u043d\u0438\u0442\u0441\u044f \u0437\u0430 \"\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044c \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430\u0442\u043e\u0440\".\n\n\n\n\t\n\n\n\n\t\u0412 \u0445\u043e\u0434\u0435 \u0434\u0430\u043d\u043d\u043e\u0439 \u043e\u043f\u0435\u0440\u0430\u0446\u0438\u0438 \u043c\u043e\u0433\u0443\u0442 \u0441\u044b\u043f\u0430\u0442\u044c\u0441\u044f \u043e\u0448\u0438\u0431\u043a\u0438 \u0443\u043a\u0430\u0437\u044b\u0432\u0430\u044e\u0449\u0438\u0435 \u043d\u0430 \u043f\u0440\u043e\u0431\u043b\u0435\u043c\u044b \u0441 USBasp.\n\n\n\n\n\n\t\u041f\u043e\u043f\u0440\u043e\u0441\u0442\u0443 \u0438\u0433\u043d\u043e\u0440\u0438\u0440\u0443\u0435\u043c \u0438\u0445!\n\n\n\n\t\u0418\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u0435 Arduino \u0432 \u043a\u0430\u0447\u0435\u0441\u0442\u0432\u0435 \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430\u0442\u043e\u0440\u0430\n\n\n\n\t\u041d\u0430\u043c \u043f\u043e\u043d\u0430\u0434\u043e\u0431\u0438\u0442\u0441\u044f \u0432\u0442\u043e\u0440\u0430\u044f \u043f\u043b\u0430\u0442\u0430 Arduino. \u041f\u0440\u043e\u0448\u0438\u0432\u0430\u0435\u043c \u0435\u0451 \u0441\u043a\u0435\u0442\u0447\u0435\u043c ArduinoISP, \u0438\u0434\u0443\u0449\u0438\u043c \u043f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e \u0441\u043e \u0441\u0440\u0435\u0434\u043e\u0439 \u0440\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0438. \u041f\u043e\u0441\u043b\u0435 \u044d\u0442\u043e\u0433\u043e Arduino \u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u0441\u044f \u043f\u043e\u043b\u043d\u043e\u0446\u0435\u043d\u043d\u044b\u043c \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430\u0442\u043e\u0440\u043e\u043c.\n\n\n\n// pin name:    not-mega:         mega(1280 and 2560)\n// slave reset: 10:               53\n// MOSI:        11:               51\n// MISO:        12:               50\n// SCK:         13:               52\n\n\n\t\u0412 \u0441\u043a\u0435\u0442\u0447\u0435 \u0438\u043c\u0435\u0435\u0442\u0441\u044f \u043f\u043e\u0434\u0441\u043a\u0430\u0437\u043a\u0430 \u0441 \u0441\u043f\u043e\u0441\u043e\u0431\u043e\u043c \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u044f.\n\n\n\n\n\n\n\n\t\u0418\u0437\u043c\u0435\u043d\u044f\u0435\u043c \u0432 Arduino IDE \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430\u0442\u043e\u0440 \u043d\u0430\u00a0\u00a0Arduino as ISP, \u0432\u044b\u0431\u0438\u0440\u0430\u0435\u043c \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u0443\u044e \u043f\u043b\u0430\u0442\u0443, \u043a \u043a\u043e\u0442\u043e\u0440\u043e\u0439 \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d \u043d\u0430\u0448 \u0432\u043d\u043e\u0432\u044c \u0438\u0441\u043f\u0435\u0447\u0435\u043d\u043d\u044b\u0439 \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430\u0442\u043e\u0440 \u0438 \"\u043f\u0440\u043e\u0436\u0438\u0433\u0430\u0435\u043c\" \u0437\u0430\u0433\u0440\u0443\u0437\u0447\u0438\u043a.\n\n\n\n\t\n\n\n\n\t\u0415\u0441\u043b\u0438 \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u043e \u0437\u0430\u043f\u0438\u0441\u0430\u0442\u044c \u043a\u0430\u043a\u043e\u0439 \u043b\u0438\u0431\u043e \u0441\u043a\u0435\u0442\u0447, \u0442\u043e \u0434\u0435\u043b\u0430\u0435\u043c \u044d\u0442\u043e \u0442\u0430\u043a\u0436\u0435 \u043f\u0440\u0438 \u0437\u0430\u0436\u0430\u0442\u043e\u0439 \u043a\u043b\u0430\u0432\u0438\u0448\u0438 SHIFT (\u043a\u0430\u043a \u0438 \u0432 \u043f\u0435\u0440\u0432\u043e\u043c \u0432\u0430\u0440\u0438\u0430\u043d\u0442\u0435).\n\n\n\n\tPS:\u00a0\u041f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e \u0432 \u0441\u0440\u0435\u0434\u0435 \u0440\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0438 \u0438\u043c\u0435\u044e\u0442\u0441\u044f \u0444\u0430\u0439\u043b\u044b \u0437\u0430\u0433\u0440\u0443\u0437\u0447\u0438\u043a\u0430 optiboot \u0438 \u0441\u043a\u0430\u0447\u0438\u0432\u0430\u0442\u044c \u043d\u0438\u0447\u0435\u0433\u043e \u043d\u0435 \u043d\u0443\u0436\u043d\u043e. \u0414\u043e\u0441\u0442\u0430\u0442\u043e\u0447\u043d\u043e \u0432\u044b\u0431\u0440\u0430\u0442\u044c \u043f\u043b\u0430\u0442\u0443 Arduino UNO \u0438 \u043f\u0435\u0440\u0435\u0437\u0430\u043f\u0438\u0441\u0430\u0442\u044c \u0437\u0430\u0433\u0440\u0443\u0437\u0447\u0438\u043a. \u041d\u043e \u0432 \u044d\u0442\u043e\u043c \u0441\u043b\u0443\u0447\u0430\u0435 \u0412\u0430\u0448\u0435 \u0434\u0435\u0442\u0438\u0449\u0435 \u0441\u0442\u0430\u043d\u0435\u0442 \u043e\u043f\u0440\u0435\u0434\u0435\u043b\u044f\u0442\u044c\u0441\u044f \u0438\u043c\u0435\u043d\u043d\u043e \u043a\u0430\u043a UNO, \u0434\u0430\u0436\u0435 \u0435\u0441\u043b\u0438 \u043d\u0430 \u0441\u0430\u043c\u043e\u043c \u0434\u0435\u043b\u0435 \u044d\u0442\u043e NANO, Pro Mini \u0438\u043b\u0438 \u0435\u0449\u0435 \u0447\u0442\u043e-\u0442\u043e.\n\n\n\n\thardware.zip\n\n",
+            "mainEntityOfPage": "https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/"
+        },
+        {
+            "@type": "Comment",
+            "url": "https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/?do=findComment\u0026comment=45",
+            "author": {
+                "@type": "Person",
+                "name": "Kitsum",
+                "image": "https://pp.userapi.com/c639522/v639522919/5e2ea/-KPsq33Xx_Q.jpg",
+                "url": "https://it4it.club/profile/3-kitsum/"
+            },
+            "dateCreated": "2016-01-21T21:50:39+0000",
+            "text": "\n\t\u0423\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0430 \u0434\u0440\u0430\u0439\u0432\u0435\u0440\u043e\u0432 USBasp \u0434\u043b\u044f Windows 10 / 8.1 / 8\n\n\n\n\t\n\n\n\t\u041f\u043e \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443 \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0430 \u0434\u0440\u0430\u0439\u0432\u0435\u0440\u0430 \u043f\u0440\u043e\u0441\u0442\u0430, \u043d\u043e \u0432\u043e \u0432\u0440\u0435\u043c\u044f \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0438 \u043f\u0440\u043e\u0438\u0441\u0445\u043e\u0434\u0438\u0442 \u043e\u0442\u043a\u0430\u0437 \u0442.\u043a \u043e\u0444\u0438\u0446\u0438\u0430\u043b\u044c\u043d\u044b\u0435 \u0434\u0440\u0430\u0439\u0432\u0435\u0440\u0430 \u043d\u0435 \u0438\u043c\u0435\u044e\u0442 \u0446\u0438\u0444\u0440\u043e\u0432\u043e\u0439 \u043f\u043e\u0434\u043f\u0438\u0441\u0438. \u0427\u0442\u043e\u0431\u044b \u0440\u0435\u0448\u0438\u0442\u044c \u0434\u0430\u043d\u043d\u0443\u044e \u0437\u0430\u0434\u0430\u0447\u0443, \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u043e \u0432\u0440\u0435\u043c\u0435\u043d\u043d\u043e \u043e\u0442\u043a\u043b\u044e\u0447\u0438\u0442\u044c \u043e\u0431\u044f\u0437\u0430\u0442\u0435\u043b\u044c\u043d\u0443\u044e \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0443 \u043f\u043e\u0434\u043f\u0438\u0441\u0438 \u0434\u0440\u0430\u0439\u0432\u0435\u0440\u043e\u0432.\n\n\n\n\t\u0414\u043b\u044f \u043d\u0430\u0447\u0430\u043b\u0430, \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u043e \u0441\u043a\u0430\u0447\u0430\u0442\u044c \u0441\u0430\u043c\u0438 \u0434\u0440\u0430\u0439\u0432\u0435\u0440\u0430. \u0414\u043b\u044f \u044d\u0442\u043e\u0433\u043e \u0438\u0434\u0435\u043c \u043d\u0430 \u043e\u0444\u0438\u0446\u0438\u0430\u043b\u044c\u043d\u044b\u0439 \u0441\u0430\u0439\u0442 \u0440\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u0447\u0438\u043a\u0430 (\u0430\u0432\u0442\u043e\u0440\u00a0Thomas Fischl), \u0441\u043a\u0430\u0447\u0438\u0432\u0430\u0435\u043c \u0430\u0440\u0445\u0438\u0432 \u0441 \u043f\u043e\u0441\u043b\u0435\u0434\u043d\u0435\u0439 \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u043d\u043e\u0439 \u0432\u0435\u0440\u0441\u0438\u0435\u0439 \u0438\u00a0\u0440\u0430\u0441\u043f\u0430\u043a\u043e\u0432\u044b\u0432\u0430\u0435\u043c \u0432 \u0443\u0434\u043e\u0431\u043d\u0443\u044e \u0434\u043b\u044f \u0412\u0430\u0441 \u0434\u0438\u0440\u0435\u043a\u0442\u043e\u0440\u0438\u044e.\n\n\n\n\t\u0422\u0435\u043f\u0435\u0440\u044c \u043d\u0430\u0436\u0438\u043c\u0430\u0435\u043c \u0438 \u0443\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u044f\u00a0\u043a\u043b\u0430\u0432\u0438\u0448\u0443 SHIFT \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u044f\u0435\u043c \u043a\u043e\u043c\u043f\u044c\u044e\u0442\u0435\u0440 \u043d\u0430 \u043f\u0435\u0440\u0435\u0437\u0430\u0433\u0440\u0443\u0437\u043a\u0443. \u042d\u0442\u043e \u0437\u0430\u0441\u0442\u0430\u0432\u0438\u0442 Windows \u0432\u044b\u0439\u0442\u0438 \u0432 \u0440\u0435\u0436\u0438\u043c \u0432\u043e\u0441\u0441\u0442\u0430\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u044f.\n\n\n\n\n\n\t\u041f\u043e\u0441\u043b\u0435 \u044d\u0442\u043e\u0433\u043e \u043c\u044b \u043f\u043e\u043f\u0430\u0434\u0430\u0435\u043c \u0432 \u0440\u0435\u0436\u0438\u043c \u0432\u043e\u0441\u0441\u0442\u0430\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u044f. \u0412\u044b\u0431\u0438\u0440\u0430\u0435\u043c \"\u041f\u043e\u0438\u0441\u043a \u0438 \u0443\u0441\u0442\u0440\u0430\u043d\u0435\u043d\u0438\u0435 \u043d\u0435\u0438\u0441\u043f\u0440\u0430\u0432\u043d\u043e\u0441\u0442\u0435\u0439\".\n\n\n\n\n\n\t\u0412\u044b\u0431\u0438\u0440\u0430\u0435\u043c \"\u0414\u043e\u043f\u043e\u043b\u043d\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u044b\".\n\n\n\n\n\n\t\u0412\u044b\u0431\u0438\u0440\u0430\u0435\u043c \"\u041f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u044b \u0437\u0430\u0433\u0440\u0443\u0437\u043a\u0438\".\n\n\n\n\n\n\t\u041e\u0442\u043f\u0440\u0430\u0432\u043b\u044f\u0435\u043c \u043a\u043e\u043c\u043f\u044c\u044e\u0442\u0435\u0440 \u043d\u0430 \u043f\u0435\u0440\u0435\u0437\u0430\u0433\u0440\u0443\u0437\u043a\u0443.\n\n\n\n\n\n\t\u041f\u043e\u0441\u043b\u0435 \u0432\u0441\u0435\u0445 \u044d\u0442\u0438\u043c \u043c\u0430\u043d\u0438\u043f\u0443\u043b\u044f\u0446\u0438\u0439 \u043c\u044b \u043f\u043e\u043f\u0430\u0434\u0430\u0435\u043c \u0432 \u043c\u0435\u043d\u044e \u0432\u044b\u0431\u043e\u0440\u0430 \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u043e\u0432 \u0437\u0430\u0433\u0440\u0443\u0437\u043a\u0438. \u0412\u044b\u0431\u0440\u0430\u0442\u044c \u043e\u0434\u0438\u043d \u0438\u0437 \u043f\u0435\u0440\u0435\u0447\u0438\u0441\u043b\u0435\u043d\u043d\u044b\u0445 \u0432\u0430\u0440\u0438\u0430\u043d\u0442\u043e\u0432 \u043c\u043e\u0436\u043d\u043e \u043a\u043b\u0430\u0432\u0438\u0448\u0430\u043c\u0438 \u043e\u0442 F1 \u0434\u043e\u00a0F9, \u043d\u043e \u043d\u0430\u0441 \u0438\u043d\u0442\u0435\u0440\u0435\u0441\u0443\u0435\u0442 \u0432\u0430\u0440\u0438\u0430\u043d\u0442 F7 - \"\u043e\u0442\u043a\u043b\u044e\u0447\u0438\u0442\u044c \u043e\u0431\u044f\u0437\u0430\u0442\u0435\u043b\u044c\u043d\u0443\u044e \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0443 \u043f\u043e\u0434\u043f\u0438\u0441\u0438 \u0434\u0440\u0430\u0439\u0432\u0435\u0440\u043e\u0432\".\n\n\n\n\t\n\n\n\n\t\u0414\u0430\u043b\u0435\u0435 \u0432\u0441\u0435 \u043f\u043e \u0441\u0442\u0430\u043d\u0434\u0430\u0440\u0442\u0443. \u0418\u0434\u0435\u043c \u0432 \u0441\u043f\u0438\u0441\u043e\u043a \u0443\u0441\u0442\u0440\u043e\u0439\u0441\u0442\u0432, \u0438\u0449\u0435\u043c \u043d\u0430\u0448 \u043d\u0435 \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u043b\u0435\u043d\u043d\u044b\u0439 USBasp \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430\u0442\u043e\u0440 \u0438 \u043e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0434\u0440\u0430\u0439\u0432\u0435\u0440 \u0441 \u043b\u043e\u043a\u0430\u043b\u044c\u043d\u043e\u0433\u043e \u043a\u043e\u043c\u043f\u044c\u044e\u0442\u0435\u0440\u0430 \u0443\u043a\u0430\u0437\u0430\u0432 \u043f\u0443\u0442\u044c \u0434\u043e \u0440\u0430\u0441\u043f\u0430\u043a\u043e\u0432\u0430\u043d\u043d\u043e\u0433\u043e \u0440\u0430\u043d\u0435\u0435 \u0430\u0440\u0445\u0438\u0432\u0430.\n\n\n\n\t\u0412\u043e \u0432\u0440\u0435\u043c\u044f \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0438 \u0434\u0440\u0430\u0439\u0432\u0435\u0440\u0430 \u0412\u044b \u0443\u0432\u0438\u0434\u0438\u0442\u0435 \u043f\u0440\u0435\u0434\u0443\u043f\u0440\u0435\u0436\u0434\u0435\u043d\u0438\u0435 \u043e\u0431 \u043e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0438\u0438 \u044d\u043b\u0435\u043a\u0442\u0440\u043e\u043d\u043d\u043e\u0439 \u043f\u043e\u0434\u043f\u0438\u0441\u0438. \u0418\u0433\u043d\u043e\u0440\u0438\u0440\u0443\u0435\u043c \u0435\u0433\u043e \u0438 \u043f\u0440\u043e\u0434\u043e\u043b\u0436\u0430\u0435\u043c \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0443.\n\n\n\n\t\n\n\n\t\u041f\u043e\u0441\u043b\u0435 \u044d\u0442\u0438\u0445, \u043d\u0435 \u0445\u0438\u0442\u0440\u044b\u0445 \u043c\u0430\u043d\u0438\u043f\u0443\u043b\u044f\u0446\u0438\u0439, \u043c\u044b \u043f\u043e\u043b\u0443\u0447\u0430\u0435\u043c \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u043b\u0435\u043d\u043d\u044b\u0439 \u0432 \u0441\u0438\u0441\u0442\u0435\u043c\u0435 USBasp \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430\u0442\u043e\u0440.\n\n\n\n\tPS: \u043d\u0430\u0441\u043b\u0430\u0436\u0434\u0430\u0435\u043c\u0441\u044f \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u043e\u043c.\n\n\n\n\n\n\t\u00a0\n\n",
+            "mainEntityOfPage": "https://it4it.club/topic/19-pereproshivka-bootloader-zagruzchika/"
+        }
+    ]
+}	
+</script>
+
+<script type="application/ld+json">
+{
+    "@context": "http://www.schema.org",
+    "@type": "WebSite",
+    "name": "iT4iT.CLUB",
+    "url": "https://it4it.club/",
+    "potentialAction": {
+        "type": "SearchAction",
+        "query-input": "required name=query",
+        "target": "https://it4it.club/search/?q={query}"
+    },
+    "inLanguage": [
+        {
+            "@type": "Language",
+            "name": "\u0420\u0443\u0441\u0441\u043a\u0438\u0439 (RU)",
+            "alternateName": "ru-RU"
+        },
+        {
+            "@type": "Language",
+            "name": "English (USA)",
+            "alternateName": "en-US"
+        }
+    ]
+}	
+</script>
+
+<script type="application/ld+json">
+{
+    "@context": "http://www.schema.org",
+    "@type": "Organization",
+    "name": "iT4iT.CLUB",
+    "url": "https://it4it.club/",
+    "sameAs": [
+        "https://vk.com/it4it.club",
+        "https://plus.google.com/112383373681400109404"
+    ],
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "",
+        "addressLocality": null,
+        "addressRegion": null,
+        "postalCode": null,
+        "addressCountry": null
+    }
+}	
+</script>
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+                "@id": "https://it4it.club/forum/15-%D0%BC%D0%B8%D0%BA%D1%80%D0%BE%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D0%BB%D0%B5%D1%80%D1%8B/",
+                "name": "Микроконтроллеры"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+                "@id": "https://it4it.club/forum/16-arduino/",
+                "name": "Arduino"
+            }
+        }
+    ]
+}	
+</script>
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "ContactPage",
+    "url": "https://it4it.club/contact/"
+}	
+</script>
+
+
+		
+			<!-- Google Tag Manager -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-35994851-2', 'auto');
+  ga('require', 'linkid', 'linkid.js');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Tag Manager -->
+		
+		
+		
+		
+		<!--ipsQueryLog-->
+		<!--ipsCachingLog-->
+		
+	
+<div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Перепрошивка bootloader_files/translate_24dp.png" width="20" height="20" alt="Google Переводчик"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Исходный текст</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Предложить лучший вариант перевода</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><span style="visibility: hidden; position: absolute; top: -300px; width: 1px; height: 1px; overflow: hidden; left: -300px;"><span class="ipsLoading ipsLoading_noAnim" style="display: block;"></span></span><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Язык виджета Google Переводчика" style="visibility: visible; box-sizing: content-box; width: 1170px; height: 263px; display: none;" src="./Перепрошивка bootloader_files/saved_resource.html"></iframe></body></html>
